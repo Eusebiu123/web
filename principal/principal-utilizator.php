@@ -1,3 +1,13 @@
+<?php
+
+include('../auth/server.php');
+if (empty($_SESSION['username'])){
+        header('location: ../auth/login.php');
+}
+?> 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +28,16 @@
             <li><a href="#expert"onclick="toggleMenu();">Expert</a></li>
             <li><a href="#testimonials"onclick="toggleMenu();">Testimonials</a></li>
             <li><a href="#contact"onclick="toggleMenu();">Contact</a></li>
-            <li><a href="/auth/login.php">LOGIN</a></li>
+            <li><a href="#">Formular Programari</a></li>
+            <li><a href="../auth/login.php">Login</a></li>
         </ul>
     </header>
+    <section id="banner">
+      <div class="banner-text">
+            <h2> Hello, <?php echo $_SESSION['username']; ?> !  </h2>
+           
+      </div>
+  </section>
     <section class="banner" id="banner">
         <div class="content">
             <h2>Always Choose Good</h2>

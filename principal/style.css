@@ -26,6 +26,45 @@ p{
     background: url(p1.jpg);
     background-size: cover;
 }
+/* .banner-text{
+    text-align: center;
+       color: #fff;
+       padding-top:180px;
+   
+   } */
+   #banner{
+    background: linear-gradient(rgba(0,0,0,0.5),#009688),url(poze/poza.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.logo{
+    width: 120px;
+    position: absolute;
+    top: 4%;
+    left:10%;
+    
+}
+.banner-text{
+ text-align: center;
+    color: #fff;
+    padding-top:180px;
+
+}
+.banner-text h1{
+    font-size: 130px;
+    font-family: 'Kaushan Script', cursive;
+    
+}
+.banner-text p2{
+    font-size: 30px;
+    font-style: italic;
+}
+.banner-text p{
+    font-size: 20px;
+    font-style: italic;
+}
 
 .banner .content
 {
