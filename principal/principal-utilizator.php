@@ -30,6 +30,7 @@ if (empty($_SESSION['username'])){
             <li><a href="#contact"onclick="toggleMenu();">Contact</a></li>
             <li><a href="#">Formular Programari</a></li>
             <li><a href="../auth/login.php">Login</a></li>
+            <li><a href="principal-utilizator.php?logout='1'">Logout</a> </li>
         </ul>
     </header>
     <section id="banner">

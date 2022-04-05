@@ -32,6 +32,11 @@
 			if(mysqli_num_rows($result)==1){
 				array_push($errors, "Acest email a fost deja utilizat");
 			}
+			$sql="SELECT * FROM users WHERE username='$username'";
+			$result=mysqli_query($mysqli,$sql);
+			if(mysqli_num_rows($result)==1){
+				array_push($errors, "Acest username a fost deja utilizat");
+			}
 		}
 		if(count($errors)==0){
 			$password=md5($password_1);
@@ -39,7 +44,11 @@
 			mysqli_query($mysqli,$sql);
 			$_SESSION['username']=$username;
 			$_SESSION['success']="You are now logged in";
-			header('location: index.php');
+			if($_SESSION['username']=='eusebiuuuuuuu')
+				header('location: ../principal/principal-admin.php');
+			else{
+					header('location: ../principal/principal-utilizator.php');
+				}
 		}
 
 	}
@@ -62,8 +71,8 @@
 			if(mysqli_num_rows($result)==1){
 				$_SESSION['username']=$username;
 				$_SESSION['success']="You are now logged in";
-				if($_SESSION['username']='eusebiuuuuuuu')
-				header('location: ../principal/principal-admin.php');
+				if($_SESSION['username']=='eusebiuuuuuuu')
+					header('location: ../principal/principal-admin.php');
 				else{
 					header('location: ../principal/principal-utilizator.php');
 				}
