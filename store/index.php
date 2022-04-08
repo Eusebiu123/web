@@ -1,6 +1,7 @@
 <?php
 include "config.php";
 
+
 if(isset($_POST['submit'])){
     $maxsize= 1048576000;
     
@@ -19,12 +20,12 @@ if(isset($_POST['submit'])){
                 if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
                     $sql="INSERT INTO videos(name,location) VALUES('".$name ."','".$target_file."')";
                     mysqli_query($con,$sql);
-                    $sql="INSERT INTO comenzi(nume_fisier,location) VALUES('".$name ."','".$target_file."')";
+                    $user=$_SESSION['username'];
+                    $sql="INSERT INTO comenzi(username,nume_fisier,location) VALUES('".$user ."','".$name ."','".$target_file."')";
                     mysqli_query($con,$sql);
-                    echo "\n\n";
+                    
+    
                     $_SESSION['message']="Upload successfully.";
-                    sleep(2);
-                    header('location: ../principal/principal-utilizator.php');
                     
                 }
                 else{
@@ -202,18 +203,19 @@ if(isset($_POST['submit'])){
         if(isset($_SESSION['message'])){
             echo $_SESSION['message'];
             unset($_SESSION['message']);
+            header('location: ../principal/principal-utilizator.php');
         }
     ?>
     <div class="background"></div>
     <div class="container">
     <h2>Formular Programare</h2>
     <form method="post" action="index.php" enctype="multipart/form-data">
-    <div class="form-item">
+    <!-- <div class="form-item">
                 <span class="material-icons-outlined">
                     account_circle
                     </span>
                 <input type="text" name="username"  id="text" placeholder="email">
-            </div>
+            </div> -->
 			<div class="form-item">
                 
                 <input type="text" name="email"  id="text" placeholder="nume_vehicul">
