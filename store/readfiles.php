@@ -12,9 +12,9 @@
 <body>
     <div>
         <?php
-            $fetchVideos=mysqli_query($con,"SELECT * FROM videos ORDER BY id DESC");
+            $fetchVideos=mysqli_query($con,"SELECT * FROM comenzi ORDER BY id DESC");
             while($row=mysqli_fetch_assoc($fetchVideos)){
-                $name=$row['name'];
+                $name=$row['nume_fisier'];
                 $location=$row['location'];
 
                 echo "<div style='float: left; margin-right:5px;'>
@@ -22,6 +22,7 @@
                 height='320px'></video><br>
                 <span>".$name."</span>
                 </div>";
+                
                 
             }
         ?>
