@@ -28,7 +28,7 @@ if (empty($_SESSION['username'])){
             <li><a href="#expert"onclick="toggleMenu();">Expert</a></li>
             <li><a href="#testimonials"onclick="toggleMenu();">Testimonials</a></li>
             <li><a href="#contact"onclick="toggleMenu();">Contact</a></li>
-            <li><a href="#">Formular Programari</a></li>
+            <li><a href="../store/index.php">Formular Programari</a></li>
             <li><a href="../auth/login.php">Login</a></li>
             <li><a href="principal-utilizator.php?logout='1'">Logout</a> </li>
         </ul>
