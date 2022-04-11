@@ -28,9 +28,11 @@ if (empty($_SESSION['username'])){
             <li><a href="#expert"onclick="toggleMenu();">Expert</a></li>
             <li><a href="#testimonials"onclick="toggleMenu();">Testimonials</a></li>
             <li><a href="#contact"onclick="toggleMenu();">Contact</a></li>
-            <li><a href="../store/index.php">Formular Programari</a></li>
-            <li><a href="../auth/login.php">Login</a></li>
-            <li><a href="principal-utilizator.php?logout='1'">Logout</a> </li>
+            <li><a href="#contact"onclick="toggleMenu();">Calendar</a></li>
+            <li><a href="../store/index.php"onclick="toggleMenu();">Formular Programari</a></li>
+
+            <!-- <li><a href="../auth/login.php"onclick="toggleMenu();">Login</a></li> -->
+            <li><a href="principal-utilizator.php?logout='1'"onclick="toggleMenu();">Logout</a> </li>
         </ul>
     </header>
     <section id="banner">
@@ -243,9 +245,6 @@ if (empty($_SESSION['username'])){
         </div>
 
     </section>
-
-
-
 
     <script type="text/javascript">
         window.addEventListener('scroll',function(){

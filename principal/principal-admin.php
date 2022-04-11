@@ -25,8 +25,10 @@ if (empty($_SESSION['username'])){
             <li><a href="#expert"onclick="toggleMenu();">Expert</a></li>
             <li><a href="#testimonials"onclick="toggleMenu();">Testimonials</a></li>
             <li><a href="#contact"onclick="toggleMenu();">Contact</a></li>
-            <li><a href="../admin/afisare_comenzi.php">Programari</a></li>
-            <li><a href="principal-admin.php?logout='1'">Logout</a> </li>
+            <li><a href="../admin/afisare_comenzi.php"onclick="toggleMenu();">Programari</a></li>
+            <li><a href="#"onclick="toggleMenu();">Stoc Existent</a></li>
+            <li><a href="#"onclick="toggleMenu();">Comenzi Furnizor</a></li>
+            <li><a href="principal-admin.php?logout='1'"onclick="toggleMenu();">Logout</a> </li>
         </ul>
     </header>
     <section id="banner">
