@@ -27,6 +27,7 @@
 		}
 		if(count($errors)==0)
 		{
+			echo "aa";
 			$sql="SELECT * FROM users WHERE email='$email'";
 			$result=mysqli_query($mysqli,$sql);
 			if(mysqli_num_rows($result)==1){
