@@ -19,6 +19,8 @@ if(isset($_POST['submit'])){
                 if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
                     $user=$_SESSION['username'];
                     $sql="INSERT INTO comenzi(username,nume_fisier,location) VALUES('".$user ."','".$name ."','".$target_file."')";
+                    //TODO inserat in bd si data,ora,nume_vehicul,piesa
+                    // $sql="INSERT INTO comenzi(username,nume_fisier,location) VALUES('".$user ."','".$name ."','".$target_file."')";
                     mysqli_query($mysqli,$sql);
                     
     
@@ -217,6 +219,10 @@ if(isset($_POST['submit'])){
                 
                 <input type="text" name="email"  id="text" placeholder="nume_vehicul">
             </div>
+            <div class="form-item">
+                
+                <input type="text" name="email"  id="text" placeholder="marca">
+            </div>
 
             <div class="form-item">
     
@@ -244,9 +250,7 @@ if(isset($_POST['submit'])){
             </div>
 
             <button type="submit" name="submit" value="Upload"> Upload </button>
-            <!-- <p>Already a member? <a href="login.php">Sign in</a></p> -->
-        <!-- <input type="file" name="file"> -->
-        <!-- <input type="submit" name="submit" value="Upload"> -->
+      
     </form>
 </body>
 </html>

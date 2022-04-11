@@ -2,7 +2,7 @@
 include('../auth/server.php');
 
 
-$sql = "SELECT * FROM comenzi ";
+$sql = "SELECT * FROM stoc ";
 $result=mysqli_query($mysqli,$sql);
 
 
@@ -18,38 +18,33 @@ $result=mysqli_query($mysqli,$sql);
     <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
-        <table align="center" border="1px" style="width:1200px; line-height:60px;">
-                <tr>
-                    <th colspan="6"><h2 style="text-align: center;">PROGRAMARI</h2></th>
-                </tr>
+    <table align="center" border="1px" style="width:700px; line-height:60px;">
+        <tr>
+            <th colspan="5"><h2 style="text-align: center;">Stoc Existent</h2></th>
+        </tr>
 
-                <t>
-                    <th>Username</th>
-                    <th>Nume_Vehicul</th>
-                    <th>MARCA</th>
-                    <th>PIESA</th>
-                    <th>DATA</th>
-                    <th>ORA</th>
-                </t>
-                <?php
-                while($rows=mysqli_fetch_assoc($result))
-                {
-                ?>
-                    <tr>
-                        <td><?php echo $rows['username']; ?></td>
-                        <td><?php echo $rows['nume_vehicul']; ?></td>
-                        <td><?php echo $rows['marca']; ?></td>
-                        <td><?php echo $rows['piesa']; ?></td>
-                        <td><?php echo $rows['data']; ?></td>
-                        <td><?php echo $rows['ora']; ?></td>
-                    </tr>
-                    <?php
-                }
-                ?>
-            </table>
-
-
-
+        <t>
+            <th>ID</th>
+            <th>VEHICUL</th>
+            <th>MARCA</th>
+            <th>PIESA</th>
+            <th>CANTITATE</th>
+        </t>
+        <?php
+        while($rows=mysqli_fetch_assoc($result))
+        {
+        ?>
+            <tr>
+                <td><?php echo $rows['id']; ?></td>
+                <td><?php echo $rows['nume_vehicul']; ?></td>
+                <td><?php echo $rows['marca']; ?></td>
+                <td><?php echo $rows['piesa']; ?></td>
+                <td><?php echo $rows['cantitate']; ?></td>
+            </tr>
+            <?php
+        }
+        ?>
+    </table>
 
     <div id="sideNav">
         <nav>
