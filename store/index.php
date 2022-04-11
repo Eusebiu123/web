@@ -1,6 +1,5 @@
 <?php
-include "config.php";
-
+include('../auth/server.php');
 
 if(isset($_POST['submit'])){
     $maxsize= 1048576000;
@@ -18,11 +17,9 @@ if(isset($_POST['submit'])){
                 $_SESSION['message']="File too large. File must be less than 1000MB";
             }else{
                 if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
-                    // $sql="INSERT INTO videos(name,location) VALUES('".$name ."','".$target_file."')";
-                    // mysqli_query($con,$sql);
                     $user=$_SESSION['username'];
                     $sql="INSERT INTO comenzi(username,nume_fisier,location) VALUES('".$user ."','".$name ."','".$target_file."')";
-                    mysqli_query($con,$sql);
+                    mysqli_query($mysqli,$sql);
                     
     
                     $_SESSION['message']="Upload successfully.";

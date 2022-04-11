@@ -1,5 +1,5 @@
 <?php
-    include "config.php";
+    include('../auth/server.php');
 ?>
 
 
@@ -12,7 +12,7 @@
 <body>
     <div>
         <?php
-            $fetchVideos=mysqli_query($con,"SELECT * FROM comenzi ORDER BY id DESC");
+            $fetchVideos=mysqli_query($mysqli,"SELECT * FROM comenzi ORDER BY id DESC");
             while($row=mysqli_fetch_assoc($fetchVideos)){
                 $name=$row['nume_fisier'];
                 $location=$row['location'];
