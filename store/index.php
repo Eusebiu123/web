@@ -17,8 +17,14 @@ if(isset($_POST['submit'])){
                 $_SESSION['message']="File too large. File must be less than 1000MB";
             }else{
                 if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
+                    $nume_vehicul=$mysqli->real_escape_string($_POST['nume_vehicul']);
+                    $marca=$mysqli->real_escape_string($_POST['marca']);
+                    $data=$mysqli->real_escape_string($_POST['data']);
+                    $ora=$mysqli->real_escape_string($_POST['ora']);
+                    $piesa=$mysqli->real_escape_string($_POST['piesa']);
+                    $detalii=$mysqli->real_escape_string($_POST['detalii']);
                     $user=$_SESSION['username'];
-                    $sql="INSERT INTO comenzi(username,nume_fisier,location) VALUES('".$user ."','".$name ."','".$target_file."')";
+                    $sql="INSERT INTO comenzi(username,nume_vehicul,marca,piesa,data,ora,detalii,nume_fisier,location) VALUES('".$user ."','".$nume_vehicul ."','".$marca ."','".$piesa ."','".$data ."','".$ora ."','".$detalii ."','".$name ."','".$target_file."')";
                     //TODO inserat in bd si data,ora,nume_vehicul,piesa
                     // $sql="INSERT INTO comenzi(username,nume_fisier,location) VALUES('".$user ."','".$name ."','".$target_file."')";
                     mysqli_query($mysqli,$sql);
@@ -209,39 +215,34 @@ if(isset($_POST['submit'])){
     <div class="container">
     <h2>Formular Programare</h2>
     <form method="post" action="index.php" enctype="multipart/form-data">
-    <!-- <div class="form-item">
-                <span class="material-icons-outlined">
-                    account_circle
-                    </span>
-                <input type="text" name="username"  id="text" placeholder="email">
-            </div> -->
+    
 			<div class="form-item">
                 
-                <input type="text" name="email"  id="text" placeholder="nume_vehicul">
+                <input type="text" name="nume_vehicul"  id="text" placeholder="nume_vehicul">
             </div>
             <div class="form-item">
                 
-                <input type="text" name="email"  id="text" placeholder="marca">
+                <input type="text" name="marca"  id="text" placeholder="marca">
             </div>
 
             <div class="form-item">
     
-                <input type="text" name="email" id="text" placeholder="piesa">
+                <input type="text" name="piesa" id="text" placeholder="piesa">
 
             </div>
             <div class="form-item">
               
-                <input type="text" name="email" id="text" placeholder="data">
+                <input type="text" name="data" id="text" placeholder="data">
 
             </div>
             <div class="form-item">
                
-                <input type="text" name="email" id="text" placeholder="ora">
+                <input type="text" name="ora" id="text" placeholder="ora">
 
             </div>
             <div class="form-item">
               
-                <input type="text" name="email" id="text" placeholder="Detalii">
+                <input type="text" name="detalii" id="text" placeholder="Detalii">
 
             </div>
 			<div class="form-item">
@@ -249,7 +250,7 @@ if(isset($_POST['submit'])){
 
             </div>
 
-            <button type="submit" name="submit" value="Upload"> Upload </button>
+            <button type="submit" action="index.php" name="submit" value="Upload"> Upload </button>
       
     </form>
 </body>
