@@ -27,7 +27,7 @@ if (empty($_SESSION['username'])){
             <li><a href="#contact"onclick="toggleMenu();">Contact</a></li>
             <li><a href="../admin/afisare_comenzi.php"onclick="toggleMenu();">Programari</a></li>
             <li><a href="../admin/stoc.php"onclick="toggleMenu();">Stoc Existent</a></li>
-            <li><a href="#"onclick="toggleMenu();">Comenzi Furnizor</a></li>
+            <li><a href="../admin/comenzi_furnizor.php"onclick="toggleMenu();">Comenzi Furnizor</a></li>
             <li><a href="principal-admin.php?logout='1'"onclick="toggleMenu();">Logout</a> </li>
         </ul>
     </header>
