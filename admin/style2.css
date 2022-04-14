@@ -94,7 +94,6 @@ nav ul li a{
 
 .button-f{
     text-align: center;
-    font-size: medium;
 }
 
 .button-f input{
@@ -124,3 +123,11 @@ form .details-f{
     padding-bottom: 5%;
 }
 
+
+@media (max-width: 880px)
+{
+    .container-f{
+        margin-top: 20%;
+        font-size: large;
+    }
+}
