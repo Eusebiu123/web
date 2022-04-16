@@ -72,7 +72,7 @@ nav ul li a{
     font-family: serif;
     font-weight: bold;
     color: black;
-    margin: 10% 30%;
+    margin: 10% 35%;
 }
 
 .month{
@@ -129,13 +129,14 @@ td:hover{
 @media (max-width: 880px)
 {
     .calendar{
-        margin-top: 30%;
+        margin: 20% 10%;
         text-align: left;
     }
 
     table, th, td{
         font-size: 10px;
     }
+   
 
     th{
         text-align: left;
