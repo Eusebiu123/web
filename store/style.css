@@ -72,7 +72,7 @@ nav ul li a{
     font-family: serif;
     font-weight: bold;
     color: black;
-    margin: 10% 35%;
+    margin: 5% 35%;
 }
 
 .month{
@@ -84,13 +84,13 @@ nav ul li a{
     border: 2px solid rgb(218, 133, 29);
 }
 
+
 table, th, td{
+    word-wrap: break-word;
     width: 100%;
     table-layout: fixed;
     text-align: center;
-    font-size: 25px;
-    border-collapse: collapse;
-    border: 5px black;    
+    border: 5px black;
 }
 
 tr, th, td{
@@ -104,47 +104,43 @@ th{
 }
 
 td{
-    background: #a5e085;
+    background: #00264d;
     color:yellow;
     border: black;
 }
 
+.available {
+    background: #6ea352;
+}
+
+.available:hover{
+    background: green;
+}
+
 .not-available {
-    background: #ff8d8d;
+    background: #9c4040;
     
 }
 .not-available:hover{
     background: red;
 }
-.no{
-    background: #00264d;
-}
-.no:hover{
-    background: #00264d;
-}
-td:hover{
-    background: green;
-}
 
-@media (max-width: 880px)
+@media (max-width: 1200px)
 {
     .calendar{
-        margin: 20% 10%;
-        text-align: left;
+        max-width: 600px;
+        margin: 10% 10%;
     }
 
     table, th, td{
         font-size: 10px;
     }
    
-
     th{
-        text-align: left;
         vertical-align: middle;
     }
 
     td{
-        text-align: left;
         vertical-align: middle;
         font-size: small;
     }
