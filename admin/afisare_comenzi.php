@@ -2,7 +2,7 @@
 include('../auth/server.php');
 
 
-$sql = "SELECT * FROM comenzi ";
+$sql = "SELECT * FROM bookings ";
 $result=mysqli_query($mysqli,$sql);
 
 
@@ -36,12 +36,12 @@ $result=mysqli_query($mysqli,$sql);
                 {
                 ?>
                     <tr>
-                        <td><?php echo $rows['username']; ?></td>
+                        <td><?php echo $rows['name']; ?></td>
                         <td><?php echo $rows['nume_vehicul']; ?></td>
                         <td><?php echo $rows['marca']; ?></td>
                         <td><?php echo $rows['piesa']; ?></td>
-                        <td><?php echo $rows['data']; ?></td>
-                        <td><?php echo $rows['ora']; ?></td>
+                        <td><?php echo $rows['date']; ?></td>
+                        <td><?php echo $rows['timeslot']; ?></td>
                     </tr>
                     <?php
                 }
