@@ -39,6 +39,9 @@ p{
     height: 100vh;
 }
 
+h4{
+    text-align: left;
+}
 .logo{
     width: 120px;
     position: absolute;

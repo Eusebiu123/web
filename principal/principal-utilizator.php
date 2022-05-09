@@ -4,6 +4,7 @@ include('../auth/server.php');
 if (empty($_SESSION['username'])){
         header('location: ../auth/login.php');
 }
+
 ?> 
 
 
@@ -38,7 +39,17 @@ if (empty($_SESSION['username'])){
     <section id="banner">
       <div class="banner-text">
             <h2> Hello, <?php echo $_SESSION['username']; ?> !  </h2>
-           
+            <h4>
+           <?php
+           $nume = $_SESSION['username'];
+           $sql = "SELECT * FROM bookings WHERE name = '$nume'";
+           $result=mysqli_query($mysqli,$sql);           
+            while ($inreg = mysqli_fetch_assoc($result)) {
+                echo ('<li>Raspuns programare - vehiculul ' . $inreg['nume_vehicul'] . ' ' .
+                    $inreg['marca'] . ' : ' . $inreg['raspuns'] . '</li>');
+            }  
+           ?>
+           </h4>
       </div>
   </section>
     <section class="banner" id="banner">

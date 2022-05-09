@@ -5,7 +5,50 @@ include('../auth/server.php');
 $sql = "SELECT * FROM bookings ";
 $result=mysqli_query($mysqli,$sql);
 
+function check($mysqli,$inreg){
+    $pret = 0;
+    $sql = 'SELECT * from stoc';
+    $rez = mysqli_query($mysqli,$sql);
+    while ($resurse = mysqli_fetch_assoc($rez)){
+         if ($resurse['nume_vehicul'] == $inreg['nume_vehicul'] and
+            $resurse['marca'] == $inreg['marca'] and
+            $resurse['piesa'] == $inreg['piesa'] and
+            $resurse['cantitate'] > 0)
+                {$pret = $resurse['cantitate'] * 100;
+                 $resurse['cantitate'] -= 1;
+                 $new = $resurse['cantitate'];
+                 $id = $resurse['id'];
+                 $sql = "UPDATE stoc SET cantitate = '$new' WHERE id = '$id'";
+                 $op = mysqli_query($mysqli,$sql);      
+                }   
+    }
+    return $pret;
+}
 
+function fetchAll($mysqli){
+    $data = [];
+
+    $sql = 'SELECT * FROM bookings WHERE raspuns is NULL';
+    $rez = mysqli_query($mysqli, $sql);
+    while ($inreg = mysqli_fetch_assoc($rez)) {
+        $pret = check($mysqli, $inreg);
+        $id = $inreg['id'];
+        if ($pret > 0){
+            // {echo ('<li>Clientul ' . $inreg['name'] . 
+            //     ' are marca ' . $inreg['marca'] . ' costa '. $pret. '</li>');
+            $msj = 'Programare acceptata - pret estimativ: ' . $pret . ' lei'; 
+            $sql = "UPDATE bookings SET raspuns = '$msj' WHERE id = '$id'";
+            $op = mysqli_query($mysqli,$sql);      
+            }
+        else{
+            $x = rand(2,5);
+            $msj = 'Ne pare rau, dar nu avem in stoc piesele necesare pentru reparatie, reveniti in ' . $x . ' saptamani';
+            $sql = "UPDATE bookings SET raspuns = '$msj' WHERE id = '$id'";
+            $op = mysqli_query($mysqli,$sql);      
+            }
+    }
+}
+fetchAll($mysqli);
 ?>
 
 <!DOCTYPE html>
