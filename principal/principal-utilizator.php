@@ -45,8 +45,9 @@ if (empty($_SESSION['username'])){
            $sql = "SELECT * FROM bookings WHERE name = '$nume'";
            $result=mysqli_query($mysqli,$sql);           
             while ($inreg = mysqli_fetch_assoc($result)) {
-                echo ('<li>Raspuns programare - vehiculul ' . $inreg['nume_vehicul'] . ' ' .
-                    $inreg['marca'] . ' : ' . $inreg['raspuns'] . '</li>');
+                if ($inreg['raspuns'] != NULL)
+                    echo ('<li>Raspuns programare - vehiculul ' . $inreg['nume_vehicul'] . ' ' .
+                        $inreg['marca'] . ' : ' . $inreg['raspuns'] . '</li>');
             }  
            ?>
            </h4>
