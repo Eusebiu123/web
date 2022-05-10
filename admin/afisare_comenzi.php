@@ -2,7 +2,9 @@
 include('../auth/server.php');
 
 
-$sql = "SELECT * FROM bookings ";
+$sql = "SELECT * FROM bookings";
+#aici trebuie sa modificam interogarea...comenzile sa aiba data >=current date(gen sa afisam doar
+#comenzile ce au data de azi sau din viitor:)))
 $result=mysqli_query($mysqli,$sql);
 
 function check($mysqli,$inreg){
@@ -27,7 +29,6 @@ function check($mysqli,$inreg){
 
 function fetchAll($mysqli){
     $data = [];
-
     $sql = 'SELECT * FROM bookings WHERE raspuns is NULL';
     $rez = mysqli_query($mysqli, $sql);
     while ($inreg = mysqli_fetch_assoc($rez)) {
@@ -37,14 +38,17 @@ function fetchAll($mysqli){
             // {echo ('<li>Clientul ' . $inreg['name'] . 
             //     ' are marca ' . $inreg['marca'] . ' costa '. $pret. '</li>');
             $msj = 'Programare acceptata - pret estimativ: ' . $pret . ' lei'; 
-            $sql = "UPDATE bookings SET raspuns = '$msj' WHERE id = '$id'";
+            $sql = "UPDATE bookings SET raspuns = '$msj',acceptat='True' WHERE id = '$id'";
             $op = mysqli_query($mysqli,$sql);      
             }
         else{
             $x = rand(2,5);
             $msj = 'Ne pare rau, dar nu avem in stoc piesele necesare pentru reparatie, reveniti in ' . $x . ' saptamani';
-            $sql = "UPDATE bookings SET raspuns = '$msj' WHERE id = '$id'";
-            $op = mysqli_query($mysqli,$sql);      
+            $sql = "UPDATE bookings SET raspuns = '$msj',acceptat='False' WHERE id = '$id'";
+            $op = mysqli_query($mysqli,$sql);    
+            #aici trebuie modificat tabelul ala din calendar....el este ocupat in momentul de fata
+            #de programarea curenta...pentru ca a fost respinsa trebuie facut update la calendar(data care e cu rosu trebuie facuta cu verde)
+            #ne vom folosi de coloana acceptat pentru a modifica calendarul  
             }
     }
 }
@@ -59,6 +63,7 @@ fetchAll($mysqli);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ceva</title>
     <link rel = "stylesheet" href = "style.css">
+    <link rel = "stylesheet" href = "style2.css">
 </head>
 <body>
         <table align="center" border="1px" style="width:1200px; line-height:60px;">
@@ -91,7 +96,9 @@ fetchAll($mysqli);
                 ?>
             </table>
 
-
+            <div class="form-submit-button">
+            <input type="submit" value ="Rezolva Programarile">
+            </div>
 
 
     <div id="sideNav">
