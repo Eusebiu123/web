@@ -17,6 +17,10 @@ if(isset($_GET['date'])){
         }
     }
 }
+function eliberare_data_pt_programarile_respinse()
+{
+    
+}
 
 if(isset($_POST['submit'])){
     $nume_fisier=$_FILES['file']['name'];
