@@ -52,7 +52,8 @@ function fetchAll($mysqli){
             }
     }
 }
-fetchAll($mysqli);
+
+// fetchAll($mysqli);
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +98,7 @@ fetchAll($mysqli);
             </table>
 
             <div class="form-submit-button">
-            <input type="submit" value ="Rezolva Programarile">
+            <input type="submit" value ="Rezolva Programarile" onClick = "<?php fetchAll($mysqli); ?>">
             </div>
 
 
@@ -118,7 +119,7 @@ fetchAll($mysqli);
       var sideNav =document.getElementById("sideNav")
       var menu =document.getElementById("menu")
       sideNav.style.right = "-250px";
-      
+
         menuBtn.onclick=function(){
             if(sideNav.style.right=="-250px"){
                 sideNav.style.right = "0";

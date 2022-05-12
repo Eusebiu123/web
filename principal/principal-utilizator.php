@@ -31,7 +31,7 @@ if (empty($_SESSION['username'])){
             <li><a href="#contact"onclick="toggleMenu();">Contact</a></li>
             <!-- <li><a href="../store/calendar.php"onclick="toggleMenu();">Calendar</a></li> -->
             <li><a href="../initial/index.php"onclick="toggleMenu();">Formular Programari</a></li>
-
+            <li><a href="../admin/raspuns_programari.php"onclick="toggleMenu();">Raspunsuri programari</a></li>
             <!-- <li><a href="../auth/login.php"onclick="toggleMenu();">Login</a></li> -->
             <li><a href="principal-utilizator.php?logout='1'"onclick="toggleMenu();">Logout</a> </li>
         </ul>
@@ -39,18 +39,6 @@ if (empty($_SESSION['username'])){
     <section id="banner">
       <div class="banner-text">
             <h2> Hello, <?php echo $_SESSION['username']; ?> !  </h2>
-            <h4>
-           <?php
-           $nume = $_SESSION['username'];
-           $sql = "SELECT * FROM bookings WHERE name = '$nume'";
-           $result=mysqli_query($mysqli,$sql);           
-            while ($inreg = mysqli_fetch_assoc($result)) {
-                if ($inreg['raspuns'] != NULL)
-                    echo ('<li>Raspuns programare - vehiculul ' . $inreg['nume_vehicul'] . ' ' .
-                        $inreg['marca'] . ' : ' . $inreg['raspuns'] . '</li>');
-            }  
-           ?>
-           </h4>
       </div>
   </section>
     <section class="banner" id="banner">
