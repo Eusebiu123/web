@@ -1,6 +1,29 @@
 <?php
 include('../auth/server.php');
 
+$mysqli = new mysqli('localhost', 'root', '', 'registration');
+
+if(isset($_POST['submit']))
+{    
+     $vehicul = $mysqli->real_escape_string($_POST['type-veh']);
+     $marca = $mysqli->real_escape_string($_POST['marca-f']);
+     $piesa = $mysqli->real_escape_string($_POST['piesa-f']);
+     $cantitate = $mysqli->real_escape_string($_POST['quantity']);
+     
+    //  $sql = 'SELECT MAX(id) FROM stoc';
+    //  $rez = mysqli_query($mysqli, $sql);
+    //  $inreg = mysqli_fetch_assoc($rez);
+    //  $id = $inreg['id'];
+    //  $id += 1; 
+
+     $stmt = $mysqli->prepare("INSERT INTO stoc (nume_vehicul, marca, piesa, cantitate) VALUES (?,?,?,?)");
+     $stmt->bind_param('ssss', $vehicul, $marca, $piesa, $cantitate);
+     $stmt->execute();
+     $stmt->close();
+     $mysqli->close();
+     sleep(1);
+     header("Location: http://localhost/web/principal/principal-admin.php");
+}
 ?>
 
 
@@ -15,7 +38,7 @@ include('../auth/server.php');
 <body>
     <div class="container-f">
     <div class="title-f">Formular</div>
-    <form method="post"> <!-- action = -->
+    <form method="post" action="comenzi_furnizor.php"> 
         <div class="company-f">
             <div class="input-f">
                 <span class="details-f">Nume Service</span>
@@ -46,29 +69,29 @@ include('../auth/server.php');
         <div class="marca-detalii-f">
         <label for="marca-veh-f">Marca vehicul</label>
             <select name="marca-f" id="marca-f">
-                        <option value="1">Kawasaki</option>
-                        <option value="2">Honda</option>
-                        <option value="3">Indian</option>
-                        <option value="4">Suzuki</option>
-                        <option value="5">Pegas</option>
-                        <option value="6">OEM</option>
-                        <option value="7">Giant</option>
-                        <option value="8">GT</option>
-                        <option value="9">Cube</option>
-                        <option value="10">Zero</option>
-                        <option value="11">Lime</option>
-                        <option value="12">Razor</option>
+                        <option value="Kawasaki">Kawasaki</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Suzuki">Suzuki</option>
+                        <option value="Pegas">Pegas</option>
+                        <option value="OEM">OEM</option>
+                        <option value="Giant">Giant</option>
+                        <option value="GT">GT</option>
+                        <option value="Cube">Cube</option>
+                        <option value="Zero">Zero</option>
+                        <option value="Lime">Lime</option>
+                        <option value="Razor">Razor</option>
             </select><br>
         </div>
         <div class="piesa-detalii-f">
         <label for="piesa-veh-f">Piesa necesara</label>
             <select name="piesa-f" id="piesa-f">
-                        <option value="1">Roata</option>
-                        <option value="2">Cadran</option>
-                        <option value="3">Ghidon</option>
-                        <option value="4">Macara</option>
-                        <option value="5">Maner</option>
-                        <option value="6">Cauciuc</option>>
+                        <option value="Roata">Roata</option>
+                        <option value="Cadran">Cadran</option>
+                        <option value="Ghidon">Ghidon</option>
+                        <option value="Macara">Macara</option>
+                        <option value="Maner">Maner</option>
+                        <option value="Cauciuc">Cauciuc</option>>
             </select>
         </div>
         <div class="cantitate-detalii">
@@ -76,7 +99,7 @@ include('../auth/server.php');
             <input type="number" id="quantity" name="quantity" min="1" max="100" step="1" value="1">
         </div>
         <div class="button-f">
-            <input type="submit" value ="Submit">
+            <input type="submit" name="submit" value ="Submit">
         </div>
     </form>
 

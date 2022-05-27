@@ -12,9 +12,10 @@ function check($mysqli,$inreg){
     $sql = 'SELECT * from stoc';
     $rez = mysqli_query($mysqli,$sql);
     while ($resurse = mysqli_fetch_assoc($rez)){
-         if ($resurse['nume_vehicul'] == $inreg['nume_vehicul'] and
-            $resurse['marca'] == $inreg['marca'] and
-            $resurse['piesa'] == $inreg['piesa'] and
+        
+         if (strtolower($resurse['nume_vehicul']) == strtolower($inreg['nume_vehicul']) and
+            strtolower($resurse['marca']) == strtolower($inreg['marca']) and
+            strtolower($resurse['piesa']) == strtolower($inreg['piesa']) and
             $resurse['cantitate'] > 0)
                 {$pret = $resurse['cantitate'] * 100;
                  $resurse['cantitate'] -= 1;
@@ -54,6 +55,10 @@ function fetchAll($mysqli){
 }
 
 // fetchAll($mysqli);
+// if(isset($_POST['btnSolve'])) {
+//     global $mysqli;
+//     fetchAll($mysqli);
+// }
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +103,9 @@ function fetchAll($mysqli){
             </table>
 
             <div class="form-submit-button">
-            <input type="submit" value ="Rezolva Programarile" onClick = "<?php fetchAll($mysqli); ?>">
+            <!-- <form action="afisare_comenzi.php" method="post"> -->
+            <input type="submit" name="solveBtn" value ="Rezolva Programarile" onClick = "<?php fetchAll($mysqli); ?>">
+            <!-- </form> -->
             </div>
 
 
