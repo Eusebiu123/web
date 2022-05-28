@@ -1,6 +1,6 @@
 <?php
 include('../auth/server.php');
-
+include('import_export.php');
 
 $sql = "SELECT * FROM stoc ";
 $result=mysqli_query($mysqli,$sql);
@@ -45,6 +45,27 @@ $result=mysqli_query($mysqli,$sql);
         }
         ?>
     </table>
+
+    <div class="buttons">
+    <form method="post" action="stoc.php">
+        <input type="file" name="file" accept=".csv,.xls,.xlsx">
+
+        <input type="submit" name="iCSV"
+                class="button" value="Import CSV" >
+          
+        <input type="submit" name="iJSON"
+                class="button" value="Import JSON" >
+        
+        <input type="submit" name="eCSV"
+                class="button" value="Export CSV" >
+        
+        <input type="submit" name="eJSON"
+                class="button" value="Export JSON" >
+        
+        <input type="submit" name="ePDF"
+                class="button" value="Export PDF" >
+    </form> 
+    </div>
 
     <div id="sideNav">
         <nav>

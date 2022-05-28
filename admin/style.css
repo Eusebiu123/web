@@ -25,6 +25,20 @@ body {
     transition: 0.5s;
 }
 
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    /* border: 3px solid green; */
+}
+
+.buttons input{
+    font-size: medium;
+    border-radius: 5px;
+    background-color: aquamarine;
+}
+
 nav ul li{
     list-style: none;
     margin: 50px 20px;
