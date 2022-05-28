@@ -123,63 +123,62 @@ function timeslots($duration,$cleanup,$start,$end){
             
     </div>
     <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+        <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Booking: <span id="slot"></span></h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-            <div class="col-md-12">
-                <form action="" method="post" action="book.php" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="">Timeslot</label>
-                        <input required type="text" readonly name="timeslot" id="timeslot" class="form-control">
+   
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Booking: <span id="slot"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                                        <form action="" method="post" action="book.php" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label for="">Timeslot</label>
+                                                <input required type="text" readonly name="timeslot" id="timeslot" class="form-control">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Nume Vehicul</label>
-                        <input required type="text"  name="nume_vehicul"  class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Nume Vehicul</label>
+                                                <input required type="text"  name="nume_vehicul"  class="form-control">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Marca</label>
-                        <input required type="text"  name="marca"  class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Marca</label>
+                                                <input required type="text"  name="marca"  class="form-control">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Piesa</label>
-                        <input required type="text"  name="piesa"  class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Piesa</label>
+                                                <input required type="text"  name="piesa"  class="form-control">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Detalii</label>
-                        <input required type="text"  name="detalii"  class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Detalii</label>
+                                                <input required type="text"  name="detalii"  class="form-control">
 
-                    </div>
-                    <div class="form-group">
-                    
-                        <input  type="file"  name="file" placeholder="Alege fisier video" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                            
+                                                <input  type="file"  name="file" placeholder="Alege fisier video" class="form-control">
 
+                                            </div>
+                                        
+                                        
+                                            <div class="form-group pull-right">
+                                                <button class="btn btn-primary" type="submit" action="book.php" name="submit" value="Upload">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                        </div>
                     </div>
-                   
-                   
-                    <div class="form-group pull-right">
-                        <button class="btn btn-primary" type="submit" action="book.php" name="submit" value="Upload">
-                            Submit
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-      </div>
-      </div>
     </div>
-
-  </div>
 </div>
 
 
