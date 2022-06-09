@@ -107,10 +107,7 @@ function fetchAll($mysqli)
         }
         ?>
     </table>
-
     <input type="submit" class="btn-submit" name="solveBtn" value="Rezolva Programarile" onClick="<?php fetchAll($mysqli); ?>">
-
-
     <div id="sideNav">
         <nav>
             <ul>
