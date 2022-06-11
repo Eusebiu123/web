@@ -33,6 +33,7 @@ if (isset($_POST['submit'])) {
     $piesa = $mysqli->real_escape_string($_POST['piesa']);
     $detalii = $mysqli->real_escape_string($_POST['detalii']);
     $name = $_SESSION['username'];
+    $date = $_POST['date'];
     $timeslot = $_POST['timeslot'];
     $stmt = $mysqli->prepare("select * from bookings where date = ? AND timeslot=?");
     $stmt->bind_param('ss', $date, $timeslot);
@@ -42,7 +43,7 @@ if (isset($_POST['submit'])) {
         if ($result->num_rows > 0) {
             $msg = "<div class='alert alert-danger'>Already Booked</div>";
         } else {
-            $stmt = $mysqli->prepare("INSERT INTO bookings (name, date,timeslot,nume_vehicul,marca,piesa,detalii,nume_fisier,location) VALUES (?,?,?,?,?,?,?,?,?)");
+            $stmt = $mysqli->prepare("INSERT INTO bookings (name,date,timeslot,nume_vehicul,marca,piesa,detalii,nume_fisier,location) VALUES (?,?,?,?,?,?,?,?,?)");
             $stmt->bind_param('sssssssss', $name, $date, $timeslot, $nume_vehicul, $marca, $piesa, $detalii, $nume_fisier, $target_file);
             $stmt->execute();
             $msg = "<div class='alert alert-success'>Booking Successfull</div>";
@@ -50,7 +51,7 @@ if (isset($_POST['submit'])) {
             $stmt->close();
             $mysqli->close();
             sleep(1);
-            header("Location: http://localhost/principal/principal-utilizator.php");
+            header("Location: ../principal/principal-utilizator.php");
         }
     }
     // }   
@@ -120,31 +121,37 @@ function timeslots($duration, $cleanup, $start, $end)
 
     <section class="form-booking">
         <form method="post" action="book.php" enctype="multipart/form-data">
+
+            <div class="form-booking-item">
+                <label for="">Selected Date</label>
+                <input class="form-booking-input" readonly type="text" name="date" id="date" value=<?php echo $date; ?>>
+            </div>
+
             <div class="form-booking-item">
                 <label for="">Timeslot</label>
                 <input class="form-booking-input" required type="text" name="timeslot" id="timeslot" onkeydown="return false">
-
             </div>
+
             <div class="form-booking-item">
                 <label for="">Nume Vehicul</label>
                 <input class="form-booking-input" required type="text" name="nume_vehicul" id="test">
-
             </div>
+
             <div class="form-booking-item">
                 <label for="">Marca</label>
                 <input class="form-booking-input" required type="text" name="marca">
-
             </div>
+
             <div class="form-booking-item">
                 <label for="">Piesa</label>
                 <input class="form-booking-input" required type="text" name="piesa">
-
             </div>
+
             <div class="form-booking-item">
                 <label for="">Detalii</label>
                 <input class="form-booking-input" required type="text" name="detalii">
-
             </div>
+
             <div class="form-booking-item">
                 <input class="form-booking-input" type="file" name="file" placeholder="Choose video file">
             </div>
@@ -161,7 +168,7 @@ function timeslots($duration, $cleanup, $start, $end)
 <script>
     function fillTimeslot(button) {
         console.log(button.innerHTML);
-        document.getElementById("timeslot").value=button.innerHTML;
+        document.getElementById("timeslot").value = button.innerHTML;
     }
 </script>
 
