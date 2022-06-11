@@ -1,5 +1,13 @@
+<?php
+include('../auth/server.php');
+include('import_export.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
+
 
 <head>
     <meta charset="UTF-8">

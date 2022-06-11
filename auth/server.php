@@ -72,7 +72,7 @@
 			if(mysqli_num_rows($result)==1){
 				$_SESSION['username']=$username;
 				$_SESSION['success']="You are now logged in";
-				if($_SESSION['username']=='eusebiuuuuuuu')
+				if($_SESSION['username']=='admin')
 					header('location: ../principal/principal-admin.php');
 				else{
 					header('location: ../principal/principal-utilizator.php');

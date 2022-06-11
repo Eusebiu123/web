@@ -96,7 +96,7 @@
             speedAsDuration: true
         });
 
-
+    </script>
 </body>
 
 </html>
