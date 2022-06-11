@@ -17,6 +17,7 @@ $result = mysqli_query($mysqli, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyMaT - Admin</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
 </head>
 
 <body>
@@ -50,8 +51,8 @@ $result = mysqli_query($mysqli, $sql);
     </table>
 
     <div class="buttons">
-        <form method="post" action="stoc.php">
-            <input type="file" class="btn-submit" name="file" accept=".csv,.xls,.xlsx">
+        <form action="stoc.php" method="post" enctype="multipart/form-data">
+            <input type="file" class="btn-submit" name="file" accept=".csv,.xls,.xlsx,.json">
             <input type="submit" class="btn-submit" name="iCSV" value="Import CSV">
             <input type="submit" class="btn-submit" name="iJSON" value="Import JSON">
             <input type="submit" class="btn-submit" name="eCSV" value="Export CSV">
