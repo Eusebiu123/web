@@ -1,13 +1,3 @@
-<?php
-include('../auth/server.php');
-include('import_export.php');
-
-$sql = "SELECT * FROM stoc ";
-$result = mysqli_query($mysqli, $sql);
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,20 +24,9 @@ $result = mysqli_query($mysqli, $sql);
             <th>MARCA</th>
             <th>PIESA</th>
             <th>CANTITATE</th>
+            <tbody id="data"></tbody>
         </tr>
-        <?php
-        while ($rows = mysqli_fetch_assoc($result)) {
-        ?>
-            <tr>
-                <td><?php echo $rows['id']; ?></td>
-                <td><?php echo $rows['nume_vehicul']; ?></td>
-                <td><?php echo $rows['marca']; ?></td>
-                <td><?php echo $rows['piesa']; ?></td>
-                <td><?php echo $rows['cantitate']; ?></td>
-            </tr>
-        <?php
-        }
-        ?>
+       
     </table>
 
     <div class="buttons">
@@ -93,6 +72,37 @@ $result = mysqli_query($mysqli, $sql);
             speedAsDuration: true
         });
     </script>
+    <script>
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "datastoc.php", true);
+    ajax.send();
+ 
+    ajax.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            console.log(data);
+ 
+            var html = "";
+            for(var a = 0; a < data.length; a++) {
+                var id = data[a].id;
+                var nume_vehicul = data[a].nume_vehicul;
+                var marca = data[a].marca;
+                var piesa = data[a].piesa;
+                var cantitate = data[a].cantitate;
+
+ 
+                html += "<tr>";
+                html += "<td>" + id + "</td>";
+                    html += "<td>" + nume_vehicul + "</td>";
+                    html += "<td>" + marca + "</td>";
+                    html += "<td>" + piesa + "</td>";
+                    html += "<td>" + cantitate + "</td>";
+                html += "</tr>";
+            }
+            document.getElementById("data").innerHTML += html;
+        }
+    };
+</script>
 
 </body>
 

@@ -1,13 +1,3 @@
-<?php
-include('../auth/server.php');
-
-$nume = $_SESSION['username'];
-$sql = "SELECT * FROM bookings WHERE name = '$nume'";
-$result = mysqli_query($mysqli, $sql);
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,24 +25,9 @@ $result = mysqli_query($mysqli, $sql);
             <th>DATA</th>
             <th>ORA</th>
             <th>RASPUNS</th>
+            <tbody id="data"></tbody>
         </t>
-        <?php
-        while ($inreg = mysqli_fetch_assoc($result)) {
-            if ($inreg['raspuns'] != NULL) {
 
-        ?>
-                <tr>
-                    <td><?php echo $inreg['nume_vehicul']; ?></td>
-                    <td><?php echo $inreg['marca']; ?></td>
-                    <td><?php echo $inreg['piesa']; ?></td>
-                    <td><?php echo $inreg['date']; ?></td>
-                    <td><?php echo $inreg['timeslot']; ?></td>
-                    <td><?php echo $inreg['raspuns']; ?></td>
-                </tr>
-        <?php
-            }
-        }
-        ?>
     </table>
 
     <div id="sideNav">
@@ -66,6 +41,40 @@ $result = mysqli_query($mysqli, $sql);
     <div id="menuBtn">
         <img src="menu.png" id="menu">
     </div>
+
+    </script>
+    <script>
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "data.php", true);
+    ajax.send();
+ 
+    ajax.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            console.log(data);
+ 
+            var html = "";
+            for(var a = 0; a < data.length; a++) {
+                var nume_vehicul = data[a].nume_vehicul;
+                var marca = data[a].marca;
+                var piesa = data[a].piesa;
+                var date = data[a].date;
+                var timeslot = data[a].timeslot;
+                var raspuns = data[a].raspuns;
+ 
+                html += "<tr>";
+                    html += "<td>" + nume_vehicul + "</td>";
+                    html += "<td>" + marca + "</td>";
+                    html += "<td>" + piesa + "</td>";
+                    html += "<td>" + date + "</td>";
+                    html += "<td>" + timeslot + "</td>";
+                    html += "<td>" + raspuns + "</td>";
+                html += "</tr>";
+            }
+            document.getElementById("data").innerHTML += html;
+        }
+    };
+</script>
 
     <script>
         var menuBtn = document.getElementById("menuBtn")
@@ -86,7 +95,7 @@ $result = mysqli_query($mysqli, $sql);
             speed: 1000,
             speedAsDuration: true
         });
-    </script>
+
 
 </body>
 
