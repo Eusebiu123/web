@@ -3,8 +3,7 @@ include('../auth/server.php');
 
 
 $sql = "SELECT * FROM bookings";
-#aici trebuie sa modificam interogarea...comenzile sa aiba data >=current date(gen sa afisam doar
-#comenzile ce au data de azi sau din viitor:)))
+
 $result = mysqli_query($mysqli, $sql);
 
 function check($mysqli, $inreg)
@@ -40,8 +39,6 @@ function fetchAll($mysqli)
         $pret = check($mysqli, $inreg);
         $id = $inreg['id'];
         if ($pret > 0) {
-            // {echo ('<li>Clientul ' . $inreg['name'] . 
-            //     ' are marca ' . $inreg['marca'] . ' costa '. $pret. '</li>');
             $msj = 'Programare acceptata - pret estimativ: ' . $pret . ' lei';
             $sql = "UPDATE bookings SET raspuns = '$msj',acceptat='True' WHERE id = '$id'";
             $op = mysqli_query($mysqli, $sql);
@@ -50,18 +47,11 @@ function fetchAll($mysqli)
             $msj = 'Ne pare rau, dar nu avem in stoc piesele necesare pentru reparatie, reveniti in ' . $x . ' saptamani';
             $sql = "UPDATE bookings SET raspuns = '$msj',acceptat='False' WHERE id = '$id'";
             $op = mysqli_query($mysqli, $sql);
-            #aici trebuie modificat tabelul ala din calendar....el este ocupat in momentul de fata
-            #de programarea curenta...pentru ca a fost respinsa trebuie facut update la calendar(data care e cu rosu trebuie facuta cu verde)
-            #ne vom folosi de coloana acceptat pentru a modifica calendarul  
+    
         }
     }
 }
 
-// fetchAll($mysqli);
-// if(isset($_POST['btnSolve'])) {
-//     global $mysqli;
-//     fetchAll($mysqli);
-// }
 ?>
 
 <!DOCTYPE html>

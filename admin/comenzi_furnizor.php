@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     $stmt->close();
     $mysqli->close();
     sleep(1);
-    header("Location: http://localhost/web/principal/principal-admin.php");
+    header("Location: http://localhost/principal/principal-admin.php");
 }
 ?>
 
