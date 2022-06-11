@@ -1,7 +1,7 @@
 <?php
 include('../auth/server.php');
 
-$sql = "SELECT * FROM booking where raspuns is not NULL";
+$sql = "SELECT * FROM bookings where raspuns is not NULL";
 $result =  mysqli_query($mysqli, $sql);
 
 //storring in array;
