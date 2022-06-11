@@ -51,7 +51,11 @@ function fetchAll($mysqli)
         }
     }
 }
-
+if (isset($_POST['submit'])) {
+    fetchAll($mysqli);
+    sleep(1);
+    header("Location: http://localhost/web/principal/principal-admin.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +101,9 @@ function fetchAll($mysqli)
         }
         ?>
     </table>
-    <input type="submit" class="btn-submit" name="solveBtn" value="Rezolva Programarile" onClick="<?php fetchAll($mysqli); ?>">
+    <form action="afisare_comenzi.php" method="post">
+        <input type="submit" class="btn-submit" name="submit" value="Rezolva Programarile">
+    </form>
     <div id="sideNav">
         <nav>
             <ul>
