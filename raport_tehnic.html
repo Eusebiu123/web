@@ -246,6 +246,141 @@ $rez = mysqli_query($mysqli, $sql);
                     </section>
                     <section>
                         <h5>2.2.2.2. Comunicarea cu clientul:</h5>
+                        <p>Toate interogările spre baza de date și variabilele folosite au un scop major: răspunderea la cererile clientului, acesta solicitând 
+                            date de la server sau trimițându-le. Deoarece, în funcție de pagina pe care se află clientul, fiecare cerere poate să difere de celelalte, 
+                            server-ul trebuie să se poată adapta la ele și să răspundă corespunzător. Astfel, fiecare pagină web conține propriul cod PHP care primește 
+                            date fie de la baza de date prin intermediul interogărilor SQL, fie de la client folosind două verbe HTTP: GET și POST. În cele ce urmează 
+                            va fi prezentat codul folosit pentru fiecare pagină web:
+                        </p>
+                        <p>Primele pagini cu care va interacționa utilizatorul sunt paginile de autentificare și înregistrare. La bază au aceleași fișiere de cod, 
+                            responsabile cu administrarea tabelului users și semnalarea potențialelor erori:
+                        </p>
+                        <ul>
+                            <li>La primirea datelor de la utilizator prin intermediul unui formular, folosind metoda POST, este verificată corectitudinea datelor 
+                                primite: în cazul în care datele provin de la pagina de autentificare, se verifică dacă există un câmp în tabel cu același nume și parolă: 
+                                dacă da, utilizatorul are acces la pagina principală, iar în caz contrar cererea este respinsă și un mesaj de eroare: "Nume sau 
+                                parolă incorecte" este trimis.
+                            </li>
+                            <li>
+                                Pentru pagina de înregistrare, toate câmpurile sunt obligatorii, iar utilizatorul nu poate folosi un nume sau 
+                                o adresă de e-mail care există deja în baza de date.
+                            </li>
+                        </ul>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <figcaption>Codul pentru verificarea existenței numelui de utilizator sau parolei:</figcaption>
+                            <pre>
+                                <code>
+$sql="SELECT * FROM users WHERE email='$email'";
+$result=mysqli_query($mysqli,$sql);
+if(mysqli_num_rows($result)==1){
+    array_push($errors, "Acest email a fost deja utilizat");
+}
+$sql="SELECT * FROM users WHERE username='$username'";
+$result=mysqli_query($mysqli,$sql);
+if(mysqli_num_rows($result)==1){
+    array_push($errors, "Acest username a fost deja utilizat");
+}
+                                </code>
+                            </pre>
+                        </figure>
+                        <p>Pentru un utilizator obișnuit, cele mai importante pagini sunt formularul de programare și verificarea programărilor trimise. Astfel, o 
+                            parte semnificativă din porțiunea PHP a proiectului este concentrată aici, asigurând funcționalitatea completă a cererii de programare:
+                        </p>
+                        <ul>
+                            <li>Prima parte a formularului, calendarul, este implementat prin generarea unui tabel în mai mulți pași: primul pas este obținerea lunii 
+                                curente și crearea butoanelor pentru afișarea lunilor precedente și următoare. Al doilea pas este crearea bazei calendarului, 
+                                creând header-ele tabelului și populând celulele cu numele fiecărei zile. Al treilea pas este construirea calendarului: dacă prima zi 
+                                nu este luni, tabelul este umplut cu celule goale până prima zi coincide cu numele zilei. Dacă ziua este sâmbătă, duminică sau înainte 
+                                de prezent, celula corespunzătoare este marcată indisponibilă. La final, dacă toate intervalele de timp ale zilei sunt ocupate, este 
+                                marcată indisponibilă, cele rămase prezentând numărul de intervale rămase.
+                            </li>
+                            <li>A doua parte a formularului este alegerea orei și completarea formularului în sine: similar cu alegerea zilei, pentru fiecare oră se 
+                                verifică dacă aparține deja unei programări, caz în care este marcată indisponibilă și imposibil de apăsat. Formularul în sine 
+                                folosește metoda POST pentru a trimite datele la apăsarea butonului "Trimite".
+                            </li>
+                            <li>După primirea datelor, acestea sunt atribuite unor variabile corespunzătoare și, prin intermediul lor, încărcate în baza de date folosind 
+                                interogarea prezentată mai sus.
+                            </li>
+                        </ul>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <figcaption>Cod pentru verificarea dacă ziua este sâmbătă sau duminică:</figcaption>
+                            <pre>
+                                <code>
+$date = "$year-$month-$currentDayRel";
+$dayname = strtolower(date('l', strtotime($date)));
+if ($dayname == 'saturday' || $dayname == 'sunday') {
+    $calendar .= "&#60td class='td-unavailable'>&#60h4>$currentDay&#60/h4> &#60button class='btn-unavailable'>Week-end&#60/button>";
+} elseif ($date &#60 date('Y-m-d')) {
+    $calendar .= "&#60td class='td-unavailable'>&#60h4>$currentDay&#60/h4> &#60button class='btn-unavailable'>Day passed&#60/button>";
+}
+                                </code>
+                            </pre>
+                        </figure>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <figcaption>Codul pentru primirea datelor din formular și introducerea lor în baza de date:</figcaption>
+                            <pre>
+                                <code>
+if (isset($_POST['submit'])) {
+    $nume_fisier = $_FILES['file']['name'];
+    $target_dir = "video/";
+    $target_file = $target_dir . $nume_fisier;
+    $extension = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $extensions_arr = array("mp4", "avi", "3gp", "mov", "mpeg", "jpg", "png");
+    $nume_vehicul = $mysqli->real_escape_string($_POST['nume_vehicul']);
+    $marca = $mysqli->real_escape_string($_POST['marca']);
+    $piesa = $mysqli->real_escape_string($_POST['piesa']);
+    $detalii = $mysqli->real_escape_string($_POST['detalii']);
+    $name = $_SESSION['username'];
+    $date = $_POST['date'];
+    $timeslot = $_POST['timeslot'];
+    $stmt = $mysqli->prepare("select * from bookings where date = ? AND timeslot=?");
+    $stmt->bind_param('ss', $date, $timeslot);
+    $bookings = array();
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows == 0) {
+            $stmt = $mysqli->prepare("INSERT INTO bookings (name,date,timeslot,nume_vehicul,marca,piesa,detalii,nume_fisier,location) VALUES (?,?,?,?,?,?,?,?,?)");
+            $stmt->bind_param('sssssssss', $name, $date, $timeslot, $nume_vehicul, $marca, $piesa, $detalii, $nume_fisier, $target_file);
+            $stmt->execute();
+            $bookings[] = $timeslot;
+            $stmt->close();
+            $mysqli->close();
+            sleep(1);
+            header("Location: ../principal/principal-utilizator.php");
+        }
+    }  
+}
+                                </code>
+                            </pre>
+                        </figure>
+                        <ul>
+                            <li>Tabelul cu programările trimise afișează doar programările care au primit răspuns: acest lucru se realizează printr-o interogare SQL, 
+                                verificându-se dacă coloana raspuns nu este vidă. Datele primite sunt afișate în tabel:
+                            </li>
+                        </ul>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <pre>
+                                <code>
+&#60?php
+while ($inreg = mysqli_fetch_assoc($result)) {
+    if ($inreg['raspuns'] != NULL) {
+
+?>
+        &#60tr>
+            &#60td>&#60?php echo $inreg['nume_vehicul']; ?>&#60/td>
+            &#60td>&#60?php echo $inreg['marca']; ?>&#60/td>
+            &#60td>&#60?php echo $inreg['piesa']; ?>&#60/td>
+            &#60td>&#60?php echo $inreg['date']; ?>&#60/td>
+            &#60td>&#60?php echo $inreg['timeslot']; ?>&#60/td>
+            &#60td>&#60?php echo $inreg['raspuns']; ?>&#60/td>
+            &#60/tr>
+&#60?php
+    }
+}
+?>
+                                </code>
+                            </pre>
+                        </figure>
                     </section>
                 </section>
             </section>
