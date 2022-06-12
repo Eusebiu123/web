@@ -125,15 +125,34 @@
                     </section>
                     <section>
                         <h5>2.1.2.2. Tabelul cu programări:</h5>
-                        <p>Tabelul cu programări prezintă toate programările care au primit răspuns de la administrator. Acest tabel conține 6 câmpuri:</p>
-                        <ul>
-                            <li>Nume vehicul</li>
-                            <li>Marca</li>
-                            <li>Piesa</li>
-                            <li>Data</li>
-                            <li>Ora</li>
-                            <li>Răspuns</li>
-                        </ul>
+                        <p>Tabelul cu programări prezintă toate programările care au primit răspuns de la administrator. Acest tabel conține 6 câmpuri: Nume vehicul, Marca, 
+                            Piesa, Data, Ora, Răspuns. </p>
+                    </section>
+                </section>
+                <section>
+                    <h4>2.1.3. Paginile pentru administrator:</h4>
+                    <p>În cazul în care utilizatorul autentificat este un administrator, acesta va fi trimis spre o pagină specială cu un header diferit: 
+                        paginile disponibile numai administratorilor sunt Programări, Stoc Existent și Comenzi Furnizor.
+                    </p>
+                    <section>
+                        <h5>2.1.3.1. Pagina cu programări realizate:</h5>
+                        <p>Pe această pagină administratorul observă toate programările făcute până în prezent, având opțiunea de a le rezolva pe toate apăsând un singur 
+                            buton: Rezolvă Programările. Acest tabel are 6 câmpuri: Nume utilizator, Nume vehicul, Marca, Piesa, Data, Ora.
+                        </p>
+                    </section>
+                    <section>
+                        <h5>2.1.3.2 Stocul Existent:</h5>
+                        <p>Pe această pagină, administratorul poate vedea stocurile de piese rămase, organizate într-un tabel cu 5 câmpuri: ID, Nume vehicul, Marca, 
+                            Piesa, Cantitate. De asemenea, sub tabel există mai multe butoane pentru importarea și exportarea datelor: importarea se poate face în format 
+                            CSV sau JSON și necesită un fișier, iar exportarea se poate face în CSV, JSON sau PDF.
+                        </p>
+                    </section>
+                    <section>
+                        <h5>2.1.3.3. Comenzi Furnizor:</h5>
+                        <p>Aici, administratorul poate realiza comenzi spre furnizori prin intermediul unui formular. În acest formular administratorul introduce 
+                            numele service-ului, adresa de e-mail, numărul de telefon și va alege tipul de vehicul, marca, piesa necesară și cantitatea. La apăsarea 
+                            butonului Submit, piesele vor fi adăugate automat în tabelul de stoc.
+                        </p>
                     </section>
                 </section>
             </section>
