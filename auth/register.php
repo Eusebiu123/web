@@ -21,7 +21,7 @@ include('server.php');
             <?php include('errors.php'); ?>
 
             <div class="form-item">
-                <input type="text" name="username" id="text" placeholder="username">
+                <input type="text" name="username" id="text" minlength="5" placeholder="username">
             </div>
 
             <div class="form-item">
@@ -29,11 +29,11 @@ include('server.php');
             </div>
 
             <div class="form-item">
-                <input type="password" name="password_1" id="pass" placeholder="password">
+                <input type="password" name="password_1" id="pass" minlength="8" placeholder="password">
             </div>
 
             <div class="form-item">
-                <input type="password" name="password_2" id="pass" placeholder="Confirm password">
+                <input type="password" name="password_2" id="pass" minlength="8" placeholder="Confirm password">
             </div>
             <button type="submit" name="register"> REGISTER </button>
             <p>Already a member? <a href="login.php">Sign in</a></p>
