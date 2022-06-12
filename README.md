@@ -309,9 +309,9 @@ if(mysqli_num_rows($result)==1){
 $date = "$year-$month-$currentDayRel";
 $dayname = strtolower(date('l', strtotime($date)));
 if ($dayname == 'saturday' || $dayname == 'sunday') {
-    $calendar .= "&#60td class='td-unavailable'>&#60h4>$currentDay&#60/h4> &#60button class='btn-unavailable'>Week-end&#60/button>";
-} elseif ($date &#60 date('Y-m-d')) {
-    $calendar .= "&#60td class='td-unavailable'>&#60h4>$currentDay&#60/h4> &#60button class='btn-unavailable'>Day passed&#60/button>";
+    $calendar .= "&lt;td class='td-unavailable'>&lt;h4>$currentDay&lt;/h4> &lt;button class='btn-unavailable'>Week-end&lt;/button>";
+} elseif ($date &lt; date('Y-m-d')) {
+    $calendar .= "&lt;td class='td-unavailable'>&lt;h4>$currentDay&lt;/h4> &lt;button class='btn-unavailable'>Day passed&lt;/button>";
 }
                                 </code>
                             </pre>
@@ -361,20 +361,20 @@ if (isset($_POST['submit'])) {
                         <figure typeof="schema:SoftwareSourceCode">
                             <pre>
                                 <code>
-&#60?php
+&lt;?php
 while ($inreg = mysqli_fetch_assoc($result)) {
     if ($inreg['raspuns'] != NULL) {
 
 ?>
-        &#60tr>
-            &#60td>&#60?php echo $inreg['nume_vehicul']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['marca']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['piesa']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['date']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['timeslot']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['raspuns']; ?>&#60/td>
-            &#60/tr>
-&#60?php
+    &lt;tr>
+        &lt;td>&lt;?php echo $inreg['nume_vehicul']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['marca']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['piesa']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['date']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['timeslot']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['raspuns']; ?>&lt;/td>
+    &lt;/tr>
+&lt;?php
     }
 }
 ?>
