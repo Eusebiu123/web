@@ -159,8 +159,95 @@
             <section>
                 <h3>2.2. Back-end:</h3>
                 <p>
-                    Partea de back-end va fi implementată în proiectul final.
+                    Partea de back-end a proiectului constă dintr-o multitudine de funcții PHP și JavaScript prin care sunt trimise date spre și dinspre baza de date 
+                    asociată site-ului, pentru a asigura funcționarea sa. În cele ce urmează se vor prezenta baza de date și funcțiile care compun back-end-ul.
                 </p>
+                <section>
+                    <h4>2.2.1. Baza de date:</h4>
+                    <p>Baza de date conține toate datele necesare funcționării corecte a site-ului web. Realizată folosind un server de tip MariaDB, baza conține trei 
+                        tabele care administrează cele trei tipuri de date folosite:
+                    </p>
+                    <ul>
+                        <li>Users: Acest tabel conține toți utilizatorii înregistrați, informațiile despre aceștia fiind organizate în 4 coloane: id este id-ul 
+                            unic pentru fiecare utilizator, username este numele de cont ales, email este adresa de e-mail înregistrată la momentul creării contului, 
+                            iar password este parola utilizatorului, criptată folosind funcția hash MD5.
+                        </li>
+                        <li>Stoc: Acest tabel conține toate piesele din stocul service-ului și informații despre ele. Tabelul conține 5 coloane: id, nume_vehicul 
+                            este tipul vehiculului de proveniență al piesei, marca este marca vehiculului, piesa este tipul de piesa din stoc, iar cantitate este numărul
+                            de astfel de piese în posesia service-ului.
+                        </li>
+                        <li>Bookings: Acest tabel administrează toate programările făcute de utilizatori la service, conținând toate informațiile necesare în 11 
+                            coloane: id, name este numele utilizatorului care s-a programat, date este ziua programării, timeslot este intervalul orar rezervat, 
+                            nume_vehicul este tipul de vehicul pentru care se dorește revizia, marca este marca vehiculului, piesa este piesa care trebuie reparată 
+                            sau schimbată, detalii sunt toate detaliile în plus incluse în comandă, nume_fisier este numele fișierului atașat, location este locația 
+                            fișierului, iar raspuns este răspunsul primit de la administrator atunci când acesta rezolvă programarea.
+                        </li>
+                    </ul>
+                    <p>Folosind interogări SQL, funcțiile PHP interacționează cu această bază de date, preluând date pentru a le afișa utilizatorilor sau introducând 
+                        date, după caz.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.2. Funcțiile PHP:</h4>
+                    <p>PHP este limbajul de programare utilizat pentru back-end. Prin urmare, toate elementele de cod PHP au rolul de a asigura funcționalitatea 
+                        fiecărui aspect al site-ului web ce nu ține de design. Aceste funcționalități se împart în două mari categorii: comunicarea cu baza 
+                        de date și comunicarea cu clientul.
+                    </p>
+                    <section>
+                        <h5>2.2.2.1. Comunicarea cu baza de date:</h5>
+                        <p>Pentru a putea comunica cu baza de date, primul și cel mai important pas este conectarea la aceasta. Acest lucru se face prin apelul 
+                            funcției mysqli_connect() care primește ca parametri adresa serverului, numele de utilizator, parola și baza de date la care se dorește 
+                            conectarea, astfel:
+                        </p>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <pre>
+                                <code>
+$mysqli=mysqli_connect('localhost','root','','registration');
+                                </code>
+                            </pre>
+                        </figure>
+                        <p>După realizarea conectării, comunicarea se realizează prin interogări SQL spre baza de date. În funcție de tipul interogării, variabilele 
+                            folosite pentru reținerea datelor sunt prelucrate pentru trimiterea în bază sau atribuirea valorilor primite. În cele ce urmează vor fi 
+                            prezentate câteva interogări folosite în proiect:
+                        </p>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <figcaption>Interogare folosind un prepared statement în care se creează o nouă linie în tabelul bookings, folosind 9 variabile:</figcaption>
+                            <pre>
+                                <code>
+$stmt = $mysqli->prepare("INSERT INTO bookings (name,date,timeslot,nume_vehicul,marca,piesa,detalii,nume_fisier,location) VALUES (?,?,?,?,?,?,?,?,?)");
+$stmt->bind_param('sssssssss', $name, $date, $timeslot, $nume_vehicul, $marca, $piesa, $detalii, $nume_fisier, $target_file);
+$stmt->execute();
+                                </code>
+                            </pre>
+                        </figure>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <figcaption>Interogare în care se obțin toți utilizatorii cu un anumit e-mail, dat ca variabilă. Rezultatul este înregistrat 
+                                într-o variabilă proprie:
+                            </figcaption>
+                            <pre>
+                                <code>
+$sql="SELECT * FROM users WHERE email='$email'";
+$result=mysqli_query($mysqli,$sql);
+                                </code>
+                            </pre>
+                        </figure>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <figcaption>Interogare în care se obțin toate programările fără răspuns:</figcaption>
+                            <pre>
+                                <code>
+$sql = 'SELECT * FROM bookings WHERE raspuns is NULL';
+$rez = mysqli_query($mysqli, $sql);
+                                </code>
+                            </pre>
+                        </figure>
+                        <p>Apelând astfel de funcții, baza de date primește date de la client pentru a fi actualizată, sau oferă date care vor fi folosite pentru a 
+                            răspunde cererilor clientului.
+                        </p>
+                    </section>
+                    <section>
+                        <h5>2.2.2.2. Comunicarea cu clientul:</h5>
+                    </section>
+                </section>
             </section>
         </section>
         <section role="doc-conclusion">
