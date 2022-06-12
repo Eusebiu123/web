@@ -45,11 +45,17 @@
 			mysqli_query($mysqli,$sql);
 			$_SESSION['username']=$username;
 			$_SESSION['success']="You are now logged in";
-			if($_SESSION['username']=='eusebiuuuuuuu')
+			$name = $_SESSION['username'];
+			$sql = "SELECT isadmin from users where username like '$name'";
+			$rez=mysqli_query($mysqli,$sql);
+			while ($inreg = mysqli_fetch_assoc($rez)){
+				$admin = $inreg['isadmin'];
+				if($admin == 1)
 				header('location: ../principal/principal-admin.php');
-			else{
-					header('location: ../principal/principal-utilizator.php');
+				else{
+				header('location: ../principal/principal-utilizator.php');
 				}
+			}
 		}
 
 	}
@@ -72,11 +78,18 @@
 			if(mysqli_num_rows($result)==1){
 				$_SESSION['username']=$username;
 				$_SESSION['success']="You are now logged in";
-				if($_SESSION['username']=='admin')
+				$name = $_SESSION['username'];
+				$sql = "SELECT isadmin from users where username like '$name'";
+				$rez = mysqli_query($mysqli,$sql);
+				while ($inreg = mysqli_fetch_assoc($rez)){
+					$admin = $inreg['isadmin'];
+					if($admin == 1)
 					header('location: ../principal/principal-admin.php');
-				else{
+					else{
 					header('location: ../principal/principal-utilizator.php');
+					}
 				}
+				
 
 			}else{
 				array_push($errors, "wrong username/password combination");
