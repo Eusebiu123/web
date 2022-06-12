@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyMaT (Cycling Maintenance Web Tool) - Raport Tehnic</title>
 </head>
 
 <body>
@@ -57,33 +58,83 @@
         </section>
         <section>
             <h2>2. Descriere:</h2>
+            <p>În cele ce urmează se va descrie implementarea cerințelor pentru proiectul CyMaT. Raportul cuprinde două secțiuni principale: front-end-ul site-ului 
+                și implementările funcțiilor în back-end.
+            </p>
             <section>
                 <h3>2.1. Front-end:</h3>
                 <p>
-                    Proiectul conține mai multe pagini separate în 2 categorii în funcție de cine are dreptul să le acceseze: pentru utilizatori normali  
-                    și pentru administratori, alături de o pagină de autentificare.
+                    Proiectul conține mai multe pagini separate în 2 categorii în funcție de cine are dreptul să le acceseze: pagini pentru utilizatori normali  
+                    și pentru administratori, alături de pagini comune de autentificare și înregistrare.
                 </p>
                 <section>
-                    <h4>2.1.1. Paginile pentru utilizatorii normali:</h4>
-                    <p>Utilizatorii obișnuiți au acces la o pagină principală ce conține link-uri spre un calendar cu zile disponibile pentru reparații și 
-                        spre un formular pentru realizarea de comenzi pentru reparații.
+                    <h4>2.1.1. Paginile de autentificare și înregistrare:</h4>
+                    <p>Prima pagină la care are acces un utilizator este pagina de autentificare, unde trebuie să își introducă username-ul și parola pentru a intra în 
+                        paginile principale. În cazul în care nu are cont pe pagină, își poate crea unul pe pagina de înregistrare.
                     </p>
-                    <ul>
-                        <li>Calendarul: Pe această pagină utilizatorul va putea alege ziua și ora la care solicită o programare. Zilele și orele din calendar 
-                            au fundal colorat în verde sau roșu în funcție de disponibilitate. De exemplu, zilele roșii sunt complet ocupate, iar orele verzi 
-                            sunt disponibile.
-                        </li>
-                        <li>
-                            Formularul: După alegerea unei zile și a unei ore, utilizatorul va fi redirecționat spre un formular unde va completa marca vehiculului, 
-                            piesa pe care o va dori schimbată și, dacă dorește, o imagine sau un videoclip sugestiv.
-                        </li>
-                    </ul>
+                    <p>Pagina de înregistrare este vizual similară cu cea de autentificare. Aici utilizatorii își pot crea un cont introducând un username unic, o adresă 
+                        de e-mail și parola, care trebuie introdusă de două ori pentru confirmare. Toate câmpurile sunt obligatorii. După crearea unui cont și 
+                        autentificare, utilizatorul poate accesa pagina principală.
+                    </p>
                 </section>
                 <section>
-                    <h4>2.1.2. Paginile pentru administratori:</h4>
-                    <p>Administratorii au acces la propria pagină principală ce conține link-uri spre o pagină unde pot observa cererile primite de la utilizatori 
-                        și spre o pagină unde pot realiza comenzi pentru piese de schimb de la anumiți furnizori.
+                    <h4>2.1.2. Paginile pentru utilizatori obișnuiți:</h4>
+                    <p>După autentificare, utilizatorul are acces la pagina principală, ce conține un header cu mai multe opțiuni: Home, About, Menu, Expert 
+                        și Testimonials fac referire la diferite porțiuni ale paginii, Formular Programari trimite la calendarul cu zile disponibile pentru programari, 
+                        iar Raspunsuri programari trimite la un tabel cu programările care au primit răspuns.
                     </p>
+                    <section>
+                        <h5>2.1.2.1. Calendarul și formularul de programare:</h5>
+                        <p>Pagina calendarului este compusă din două părți: prima parte afișează luna pentru care este prezentat calendarul, iar sub aceasta sunt 
+                            3 butoane: butonul stâng afișează luna anterioară, butonul drept cea următoare, iar cel din mijloc trimite la luna curentă. A doua parte 
+                            a paginii este calendarul efectiv: un tabel cu 7 coloane și un număr de celule egal cu numărul de zile din lună. Fiecare celulă conține 
+                            numărul zilei respective și, sub număr, un buton. Aceste celule pot fi, după caz:
+                        </p>
+                        <ul>
+                            <li>Verzi, dacă există cel puțin un interval orar disponibil în ziua respectivă. În acest caz, butonul va arăta numărul de 
+                                intervale disponibile, iar apăsarea lui va duce la alegerea intervalului și completarea unui formular cu detalii despre programare.
+                            </li>
+                            <li>Roșii, dacă ziua este complet indisponibilă, butonul de sub număr fiind neapăsabil. Acest fapt poate proveni dintr-una din următoarele 
+                                cauze:
+                                <ul>
+                                    <li>Ziua deja s-a terminat, caz în care textul din buton va fi "Day passed".</li>
+                                    <li>Ziua este o sâmbătă sau o duminică, caz în care textul va fi "Week-end".</li>
+                                    <li>Toate intervalele din acea zi sunt ocupate. Butonul va avea drept text "All booked".</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>
+                            La alegerea unei zile prin apăsarea butonului respectiv, utilizatorul este trimis pe o a doua pagină în care va alege intervalul orar dintre 
+                            cele afișate și va completa un formular cu detalii despre programarea dorită. Similar cu alegerea unei zile, intervalele disponibile sunt 
+                            butoane verzi, iar cele indisponibile roșii. Formularul conține 7 câmpuri, din care 5 obligatorii:
+                        </p>
+                        <ul>
+                            <li>Câmpul "Date" este read-only și arată ziua aleasă.</li>
+                            <li>Câmpul "Timeslot" este read-only, obligatoriu și arată intervalul orar ales prin apăsarea butonului respectiv. Apăsarea unui alt buton verde
+                                va determina schimbarea sa cu un interval nou.
+                            </li>
+                            <li>Câmpul "Nume Vehicul" este obligatoriu, de tip text. Utilizatorul introduce numele vehiculului dorit pentru revizie.</li>
+                            <li>Câmpul "Marca" este obligatoriu, de tip text. Utilizatorul introduce marca vehiculului.</li>
+                            <li>Câmpul "Piesa" este obligatoriu, de tip text. Utilizatorul introduce piesa la care dorește să facă revizie sau să o înlocuiască.</li>
+                            <li>Câmpul "Detalii" este obligatoriu, de tip text. Utilizatorul introduce detalii despre revizia dorită, fie ea o reparare sau o înlocuire de piesă.</li>
+                            <li>Câmpul "Imagine / Video" este opțional, de tip fișier. Utilizatorul încarcă o imagine sau un videoclip cu componenta în cauză.</li>
+                        </ul>
+                        <p>
+                            La final, utilizatorul apasă butonul "Programare" pentru a trimite administratorului programarea.
+                        </p>
+                    </section>
+                    <section>
+                        <h5>2.1.2.2. Tabelul cu programări:</h5>
+                        <p>Tabelul cu programări prezintă toate programările care au primit răspuns de la administrator. Acest tabel conține 6 câmpuri:</p>
+                        <ul>
+                            <li>Nume vehicul</li>
+                            <li>Marca</li>
+                            <li>Piesa</li>
+                            <li>Data</li>
+                            <li>Ora</li>
+                            <li>Răspuns</li>
+                        </ul>
+                    </section>
                 </section>
             </section>
             <section>
