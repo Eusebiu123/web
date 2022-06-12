@@ -2,7 +2,7 @@
 include('../auth/server.php');
 
 
-$sql = "SELECT * FROM bookings";
+$sql = "SELECT * FROM bookings order by date";
 
 $result = mysqli_query($mysqli, $sql);
 
