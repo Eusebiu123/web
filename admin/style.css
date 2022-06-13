@@ -177,7 +177,7 @@ nav ul li a{
 }
 
 .table-scheduling {
-    width:1200px;
+    width: 80vw;
     line-height: 60px;
     border: 1px;
     background-color:#003833;
@@ -220,4 +220,45 @@ nav ul li a{
     transition: 0s;
     background-color: #0f3a21;
     border-color:#0044ff;
+}
+
+@media (max-width: 1320px) {
+    .table-scheduling th {
+        font-size: 14px;
+        padding: 0em;
+    }
+    .table-scheduling td {
+        font-size: 14px;
+        padding: 0em;
+        padding-left: 0.5em;
+    }
+
+    .buttons form {
+        columns: 2;
+        display: flex;
+        justify-items: center;
+    }
+
+    .buttons form * {
+        font-size: 12px;
+    }
+
+    .btn-submit {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 680px) {
+    .buttons {
+        margin: 3em;
+    }
+
+    .buttons form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttons form * {
+        margin: 0em;
+    }
 }

@@ -38,10 +38,10 @@ function build_calendar($month, $year)
 
 
     $calendar = "<table class='table-booking'>";
-    $calendar .= "<center><h2>$monthName $year</h2>";
+    $calendar .= "<th colspan='7'><h2>$monthName $year</h2>";
     $calendar .= "<a class='btn-booking' href='?month=" . date('m', mktime(0, 0, 0, $month - 1, 1, $year)) . "&year=" . date('Y', mktime(0, 0, 0, $month - 1, 1, $year)) . "'>Luna Anterioară</a> ";
     $calendar .= " <a class='btn-booking' href='?month=" . date('m') . "&year=" . date('Y') . "'>Luna Curentă</a> ";
-    $calendar .= "<a class='btn-booking' href='?month=" . date('m', mktime(0, 0, 0, $month + 1, 1, $year)) . "&year=" . date('Y', mktime(0, 0, 0, $month + 1, 1, $year)) . "'>Luna Următoare</a></center><br>";
+    $calendar .= "<a class='btn-booking' href='?month=" . date('m', mktime(0, 0, 0, $month + 1, 1, $year)) . "&year=" . date('Y', mktime(0, 0, 0, $month + 1, 1, $year)) . "'>Luna Următoare</a></th>";
 
 
 
@@ -98,7 +98,7 @@ function build_calendar($month, $year)
         else {
             $totalbookings = checkSlots($mysqli, $date);
             if ($totalbookings == 22) {
-                $calendar .= "<td class='td-unavailable'><h4>$currentDay</h4> <a href='#' class='btn-unavailable'>Toate rezervate</a>";
+                $calendar .= "<td class='td-unavailable'><h4>$currentDay</h4> <button class='btn-unavailable'>Toate rezervate</button>";
             } else {
 
                 $availableslots = 22 - $totalbookings;
@@ -161,7 +161,6 @@ function checkSlots($mysqli, $date)
     <section class="background"></section>
     <section class="container">
         <div class="row">
-            <div class="table-booking">
                 <?php
                 $dateComponents = getdate();
                 if (isset($_GET['month']) && isset($_GET['year'])) {
@@ -173,7 +172,6 @@ function checkSlots($mysqli, $date)
                 }
                 echo build_calendar($month, $year);
                 ?>
-            </div>
         </div>
     </section>
     <section class="row" style="text-align:center">
