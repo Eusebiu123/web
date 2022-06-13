@@ -39,11 +39,9 @@ function build_calendar($month, $year)
 
     $calendar = "<table class='table-booking'>";
     $calendar .= "<center><h2>$monthName $year</h2>";
-    $calendar .= "<a class='btn-booking' href='?month=" . date('m', mktime(0, 0, 0, $month - 1, 1, $year)) . "&year=" . date('Y', mktime(0, 0, 0, $month - 1, 1, $year)) . "'>Previous Month</a> ";
-
-    $calendar .= " <a class='btn-booking' href='?month=" . date('m') . "&year=" . date('Y') . "'>Current Month</a> ";
-
-    $calendar .= "<a class='btn-booking' href='?month=" . date('m', mktime(0, 0, 0, $month + 1, 1, $year)) . "&year=" . date('Y', mktime(0, 0, 0, $month + 1, 1, $year)) . "'>Next Month</a></center><br>";
+    $calendar .= "<a class='btn-booking' href='?month=" . date('m', mktime(0, 0, 0, $month - 1, 1, $year)) . "&year=" . date('Y', mktime(0, 0, 0, $month - 1, 1, $year)) . "'>Luna Anterioară</a> ";
+    $calendar .= " <a class='btn-booking' href='?month=" . date('m') . "&year=" . date('Y') . "'>Luna Curentă</a> ";
+    $calendar .= "<a class='btn-booking' href='?month=" . date('m', mktime(0, 0, 0, $month + 1, 1, $year)) . "&year=" . date('Y', mktime(0, 0, 0, $month + 1, 1, $year)) . "'>Luna Următoare</a></center><br>";
 
 
 
@@ -95,19 +93,16 @@ function build_calendar($month, $year)
         if ($dayname == 'saturday' || $dayname == 'sunday') {
             $calendar .= "<td class='td-unavailable'><h4>$currentDay</h4> <button class='btn-unavailable'>Week-end</button>";
         } elseif ($date < date('Y-m-d')) {
-            $calendar .= "<td class='td-unavailable'><h4>$currentDay</h4> <button class='btn-unavailable'>Day passed</button>";
+            $calendar .= "<td class='td-unavailable'><h4>$currentDay</h4> <button class='btn-unavailable'>Zi terminată</button>";
         }
-        //  }elseif(in_array($date, $bookings)){
-        //      $calendar.="<td class='$today'><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>Already Booked</button>";
-        //  }
         else {
             $totalbookings = checkSlots($mysqli, $date);
             if ($totalbookings == 22) {
-                $calendar .= "<td class='td-unavailable'><h4>$currentDay</h4> <a href='#' class='btn-unavailable'>All Booked</a>";
+                $calendar .= "<td class='td-unavailable'><h4>$currentDay</h4> <a href='#' class='btn-unavailable'>Toate rezervate</a>";
             } else {
 
                 $availableslots = 22 - $totalbookings;
-                $calendar .= "<td class='td-available'><h4>$currentDay</h4> <a href='book.php?date=" . $date . "' class='btn-booking'>$availableslots slots left</a>";
+                $calendar .= "<td class='td-available'><h4>$currentDay</h4> <a href='book.php?date=" . $date . "' class='btn-booking'>$availableslots rămase</a>";
             }
         }
 
@@ -158,7 +153,7 @@ function checkSlots($mysqli, $date)
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyMaT - Book Service Meeting</title>
+    <title>CyMaT - Programare Service</title>
     <link rel="stylesheet" href="booking.css">
 </head>
 
@@ -180,6 +175,9 @@ function checkSlots($mysqli, $date)
                 ?>
             </div>
         </div>
+    </section>
+    <section class="row" style="text-align:center">
+        <a class="btn-booking" href="../principal/principal-utilizator.php">Înapoi</a>
     </section>
 </body>
 

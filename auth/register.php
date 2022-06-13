@@ -9,7 +9,7 @@ include('server.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyMaT - Register</title>
+    <title>CyMaT - Înregistrare</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,26 +17,26 @@ include('server.php');
     <div class="background"></div>
     <section class="container">
         <form class="form-login" method="post" action="register.php">
-            <h2>Register Form</h2>
+            <h2>Înregistrare</h2>
             <?php include('errors.php'); ?>
 
             <div class="form-item">
-                <input type="text" name="username" id="text" minlength="5" placeholder="username">
+                <input type="text" name="username" id="text" minlength="5" placeholder="Nume utilizator">
             </div>
 
             <div class="form-item">
-                <input type="text" name="email" id="text" placeholder="email">
+                <input type="text" name="email" id="text" placeholder="Adresă e-mail">
             </div>
 
             <div class="form-item">
-                <input type="password" name="password_1" id="pass" minlength="8" placeholder="password">
+                <input type="password" name="password_1" id="pass" minlength="8" placeholder="Parolă">
             </div>
 
             <div class="form-item">
-                <input type="password" name="password_2" id="pass" minlength="8" placeholder="Confirm password">
+                <input type="password" name="password_2" id="pass" minlength="8" placeholder="Confirmă parola">
             </div>
-            <button type="submit" name="register"> REGISTER </button>
-            <p>Already a member? <a href="login.php">Sign in</a></p>
+            <button type="submit" name="register">ÎNREGISTRARE</button>
+            <p>Deja ai cont? <a href="login.php">Autentificare</a></p>
         </form>
     </section>
 </body>

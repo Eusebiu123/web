@@ -54,7 +54,7 @@ function fetchAll($mysqli)
 if (isset($_POST['submit'])) {
     fetchAll($mysqli);
     sleep(1);
-    header("Location: http://localhost/web/principal/principal-admin.php");
+    header("Location: ../principal/principal-admin.php");
 }
 ?>
 
@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyMaT - Admin</title>
+    <title>CyMaT - Rezolvă Programările</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
 </head>
@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
     <table class="table-scheduling">
         <tr>
             <th colspan="6">
-                <h2 style="text-align: center;">PROGRAMARI</h2>
+                <h2 style="text-align: center;">PROGRAMĂRI</h2>
             </th>
         </tr>
 
@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
         ?>
     </table>
     <form action="afisare_comenzi.php" method="post">
-        <input type="submit" class="btn-submit" name="submit" value="Rezolva Programarile">
+        <input type="submit" class="btn-submit" name="submit" value="Rezolvă Programările">
     </form>
     <div id="sideNav">
         <nav>

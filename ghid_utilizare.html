@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyMaT (Cycling Maintenance Tool) - Ghid de utilizare</title>
+</head>
+
+<body>
+    <article>
+        <header>
+            <h1>CyMaT (Cycling Maintenance Tool) - Ghid de utilizare</h1>
+        </header>
+        <div typeof="sa:AuthorsList" role="contentinfo">
+            <h2>Autori:</h2>
+            <ul>
+                <li typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person" property="schema:author">
+                        <meta property="schema:givenName" content="Andrei">
+                        <meta property="schema:familyName" content="Cîrjanu">
+                        <span property="schema:name">Andrei Cîrjanu</span>
+                    </span>
+                </li>
+                <li typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person" property="schema:author">
+                        <meta property="schema:givenName" content="Alexandru">
+                        <meta property="schema:familyName" content="Coțofan">
+                        <span property="schema:name">Alexandru Coțofan</span>
+                    </span>
+                </li>
+                <li typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person" property="schema:author">
+                        <meta property="schema:givenName" content="Eusebiu">
+                        <meta property="schema:familyName" content="Popescu">
+                        <span property="schema:name">Eusebiu Popescu</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <section role="doc-introduction">
+            <h2>1. Introducere:</h2>
+            <section role="doc-abstract">
+                <h3>1.1. Abstract:</h3>
+                <p>Acest document va servi drept ghid pentru orice utilizator care intenționează să utilizeze această
+                    aplicație. Vor fi prezentate fiecare pagină, alături de cum vor fi folosite.</p>
+            </section>
+        </section>
+        <section>
+            <h2>2. Descriere:</h2>
+            <section>
+                <h3>2.1. Descriere generală:</h3>
+                <p>Site-ul web conține mai multe pagini menite să ajute un utilizator să interacționeze cu service-ul căruia îi aparține, acesta putând trimite 
+                    cereri de programare doar prin alegerea unei zile și ore disponibile, apoi completarea unui formular. Acesta poate apoi să verifice dacă 
+                    cererea sa este aprobată sau respinsă.
+                </p>
+                <p>Dacă utilizatorul este un administrator, acesta poate verifica toate programările trimise pe o singură pagină, putând accepta sau respinge 
+                    fiecare programare la o apăsare de buton. De asemenea, acesta are acces la stocul service-ului, putând face comenzi spre furnizori prin 
+                    intermediul unui formular. Toate datele din stoc pot fi importate în format CSV sau JSON, sau exportate în CSV, JSON sau PDF.
+                </p>
+            </section>
+            <section>
+                <h3>2.2. Descriere pagini:</h3>
+                <p>În cele ce urmează vor fi prezentate toate paginile accesibile de utilizatori și rolurile îndeplinite:</p>
+                <section>
+                    <h4>2.2.1. Pagina de autentificare:</h4>
+                    <p>Pagina de autentificare este prima pagină a aplicației pentru un utilizator neautentificat, aceasta având rolul de a solicita 
+                        crearea unui cont înainte de realizarea de programări la service. Pentru autentificare, trebuie introduse numele de cont și 
+                        parola sa. În cazul în care utilizatorul nu are cont, își poate crea unul folosind pagina de înregistrare.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.2. Pagina de înregistrare:</h4>
+                    <p>Pe acestă pagină un utilizator poate crea un cont nou pentru utilizarea serviciilor oferite de site. Pentru aceasta, vor trebui introduse 
+                        un nume de cont de cel puțin 5 caractere, o adresă de e-mail și o parolă de cel puțin 8 caractere. Parola trebuie introdusă de două 
+                        ori pentru confirmare. Dacă datele introduse respectă aceste reguli și nu există deja un cont cu același nume sau adresa de e-mail, contul 
+                        va fi creat și utilizatorul imediat autentificat și trimis pe pagina principală.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.3. Pagina principală:</h4>
+                    <p>Pagina principală conține informații atractive despre service și are disponibile link-uri spre un formular de programare și o pagină de 
+                        verificare a programărilor realizate. Dacă utilizatorul este un administrator, pagina va avea link-uri spre tabeluri cu programările realizate, 
+                        stocul existent și un formular pentru a comanda piese.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.4. Calendarul și formularul de programări:</h4>
+                    <p>Formularul de programări este împărțit în două pagini: prima pagină este un calendar care arată zilele disponibile pentru programări, marcate 
+                        cu verde, cele indisponibile marcate cu roșu. Fiecare zi disponibilă are un buton pe care este scris numărul de intervale deschise. Apăsarea 
+                        unui buton va duce la cea de-a doua pagină.
+                    </p>
+                    <p>A doua pagină constă din alegera unui interval orar disponibil prin apăsarea butonului corespunzător. Apoi se vor completa detaliile necesare în 
+                        formularul de programare: tipul de vehicul, marca, piesa la care se dorește înlocuirea, detalii în plus despre revizie și, opțional, o imagine sau 
+                        un fișier video cu problema în cauză. La final, la apăsarea butonului "Trimite", utilizatorul va fi trimis pe pagina principală, comanda realizată.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.5. Pagina cu programări răspunse:</h4>
+                    <p>Pe această pagină se pot observa toate programările care au primit răspuns, organizate într-un tabel.</p>
+                    <p>Din acest punct vor fi prezentate paginile exclusive administratorilor și cum funcționează:</p>
+                </section>
+                <section>
+                    <h4>2.2.6. Pagina de administrare a programărilor:</h4>
+                    <p>Administratorului, la intrarea pe acestă pagină, i se va prezenta un tabel cu toate programările primite, acesta putându-le soluționa la o 
+                        apăsare de buton. Astfel, pentru programările care nu pot fi acceptate din lipsă de piese se va trimite un mesaj corespunzător, iar pentru 
+                        cele acceptate se va trimite prețul estimativ.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.7. Stocul existent:</h4>
+                    <p>Pe această pagină se pot observa toate piesele din inventarul service-ului, aceste date putând fi exportate în format CSV, JSON sau PDF. Alternativ, 
+                        în tabel pot fi, de asemenea, importate date în CSV sau JSON, atâta timp cât este ales fișierul corespunzător. De asemenea, este disponibil un buton 
+                        spre formularul pentru comanda de piese de la furnizor.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.8. Comanda de piese:</h4>
+                    <p>Prin intermediul acestei pagini pot fi comandate instantaneu piese pentru service. Completând un formular, administratorul poate amplasa o comandă 
+                        pentru piesele alese, specificând tipul de vehicul, marca, tipul piesei și cantitatea. De asemenea, trebuie să completeze în formular numele 
+                        service-ului, adresa de e-mail și numărul de telefon.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <h3>2.2. Ghid utilizare:</h3>
+                <p>Această secțiune prezintă un scurt ghid pentru utilizarea aplicației.</p>
+                <section>
+                    <h4>2.2.1. Autentificarea și înregistrarea:</h4>
+                    <p>La accesarea oricărei pagini, mai puțin pagina de înregistrare, utilizatorul va
+                        fi redirecționat spre pagina de autentificare, unde va trebui să introducă adresa de email și
+                        parola aleasă pentru a primi acces deplin. Dacă nu are cont, poate intra pe
+                        pagina de înregistrare prin intermediul unui buton situat sub cel de autentificare.</p>
+                    <p>Odată ajuns pe pagina de înregistrare, va fi necesară introducerea unui nume de cont, o adresă de e-mail și parola contului. Dacă numele sau 
+                        adresa există deja în baza de date se va trimite o atenționare, utilizatorul fiind nevoit să își schimbe datele de identificare. La înregistrare, 
+                        utilizatorul este autentificat automat și poate intra pe pagini.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.2. Formularul de programare:</h4>
+                    <p>Odată autentificat, utilizatorul va putea accesa calendarul și tabelul cu programări prin intermediul paginii principale. În calendar, poate alege o zi dintre cele 
+                        disponibile, marcate cu verde, urmând să intre pe o nouă pagină, în care poate alege ora la care dorește să se programeze, apoi să introducă 
+                        toate detaliile necesare: numai încărcarea de fișiere este opțională.
+                    </p>
+                </section>
+                <section>
+                    <h4>2.2.3. Verificarea programărilor:</h4>
+                    <p>Accesibilă oricărui utilizator, toate programările cu răspuns apar într-un tabel, utilizatorul putând verifica, prin intermediul 
+                        acestuia, data la care trebuie să meargă la service.</p>
+                </section>
+                <section>
+                    <h4>2.2.4. Răspunderea la comenzi:</h4>
+                    <p>Administratorul poate verifica toate comenzile și răspunde la ele prin simpla apăsare a unui buton sub tabel. Acesta va determina serverul să 
+                        trimită răspunsuri automat pe baza pieselor solicitate și disponibile. Fiecare comandă cu răspuns va apărea, apoi în tabelul cu programări răspunse.
+                    </p>
+                    <p>În caz că stocul este insuficient, administratorul poate completa un formular accesibil din pagina principală sau din tabelul cu stocul existent, 
+                        alegând piesele și cantitățile dorite. Acest stoc poate fi descărcat cu ușurință apăsând unul din butoanele "Export CSV", "Export JSON" sau "Export PDF".
+                        În caz că acesta primește piese în plus prin intermediul unui fișier CSV sau JSON, îl poate încărca în baza de date apăsând pe "Import CSV" sau "Import JSON", 
+                        adăugând piesele cu ușurință în inventar.
+                    </p>
+                </section>
+            </section>
+        </section>
+        <section role="doc-conclusion">
+            <h2>3. Concluzie:</h2>
+            <p>În concluzie, acesta este ghidul de utilizare al aplicației, care va îndruma un utilizator oarecare
+                spre utilizarea sa.</p>
+        </section>
+    </article>
+</body>
+
+</html>

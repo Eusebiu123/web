@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     $stmt->close();
     $mysqli->close();
     sleep(1);
-    header("Location: http://localhost/web/principal/principal-admin.php");
+    header("Location: ../principal/principal-admin.php");
 }
 ?>
 
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyMaT - Admin</title>
+    <title>CyMaT - Comandare Piese</title>
     <link rel="stylesheet" href="style2.css">
 </head>
 

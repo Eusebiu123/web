@@ -79,9 +79,9 @@
                 </section>
                 <section>
                     <h4>2.1.2. Paginile pentru utilizatori obișnuiți:</h4>
-                    <p>După autentificare, utilizatorul are acces la pagina principală, ce conține un header cu mai multe opțiuni: Home, About, Menu, Expert 
-                        și Testimonials fac referire la diferite porțiuni ale paginii, Formular Programari trimite la calendarul cu zile disponibile pentru programari, 
-                        iar Raspunsuri programari trimite la un tabel cu programările care au primit răspuns.
+                    <p>După autentificare, utilizatorul are acces la pagina principală, ce conține un header cu mai multe opțiuni: Acasă și Despre fac referire la diferite porțiuni ale paginii,
+                         Formular Programări trimite la calendarul cu zile disponibile pentru programari, 
+                        iar Răspunsuri Programări trimite la un tabel cu programările care au primit răspuns.
                     </p>
                     <section>
                         <h5>2.1.2.1. Calendarul și formularul de programare:</h5>
@@ -97,22 +97,21 @@
                             <li>Roșii, dacă ziua este complet indisponibilă, butonul de sub număr fiind neapăsabil. Acest fapt poate proveni dintr-una din următoarele 
                                 cauze:
                                 <ul>
-                                    <li>Ziua deja s-a terminat, caz în care textul din buton va fi "Day passed".</li>
+                                    <li>Ziua deja s-a terminat, caz în care textul din buton va fi "Zi terminată".</li>
                                     <li>Ziua este o sâmbătă sau o duminică, caz în care textul va fi "Week-end".</li>
-                                    <li>Toate intervalele din acea zi sunt ocupate. Butonul va avea drept text "All booked".</li>
+                                    <li>Toate intervalele din acea zi sunt ocupate. Butonul va avea drept text "Toate rezervate".</li>
                                 </ul>
                             </li>
                         </ul>
                         <p>
                             La alegerea unei zile prin apăsarea butonului respectiv, utilizatorul este trimis pe o a doua pagină în care va alege intervalul orar dintre 
                             cele afișate și va completa un formular cu detalii despre programarea dorită. Similar cu alegerea unei zile, intervalele disponibile sunt 
-                            butoane verzi, iar cele indisponibile roșii. Formularul conține 7 câmpuri, din care 5 obligatorii:
+                            butoane verzi, iar cele indisponibile roșii. Formularul conține 6 câmpuri, din care 5 obligatorii:
                         </p>
                         <ul>
-                            <li>Câmpul "Date" este read-only și arată ziua aleasă.</li>
-                            <li>Câmpul "Timeslot" este read-only, obligatoriu și arată intervalul orar ales prin apăsarea butonului respectiv. Apăsarea unui alt buton verde
-                                va determina schimbarea sa cu un interval nou.
-                            </li>
+                            <li>Câmpul "Data și ora alese" are două input-uri read-only, din care al doilea obligatoriu. Primul arată ziua aleasă, iar al doilea 
+                                arată intervalul orar ales prin apăsarea butonului respectiv. Apăsarea unui alt buton verde
+                                va determina schimbarea sa cu un interval nou.</li>
                             <li>Câmpul "Nume Vehicul" este obligatoriu, de tip text. Utilizatorul introduce numele vehiculului dorit pentru revizie.</li>
                             <li>Câmpul "Marca" este obligatoriu, de tip text. Utilizatorul introduce marca vehiculului.</li>
                             <li>Câmpul "Piesa" este obligatoriu, de tip text. Utilizatorul introduce piesa la care dorește să facă revizie sau să o înlocuiască.</li>
@@ -296,7 +295,7 @@ if(mysqli_num_rows($result)==1){
                             </li>
                             <li>A doua parte a formularului este alegerea orei și completarea formularului în sine: similar cu alegerea zilei, pentru fiecare oră se 
                                 verifică dacă aparține deja unei programări, caz în care este marcată indisponibilă și imposibil de apăsat. Formularul în sine 
-                                folosește metoda POST pentru a trimite datele la apăsarea butonului "Trimite".
+                                folosește metoda POST pentru a trimite datele la apăsarea butonului "Programare".
                             </li>
                             <li>După primirea datelor, acestea sunt atribuite unor variabile corespunzătoare și, prin intermediul lor, încărcate în baza de date folosind 
                                 interogarea prezentată mai sus.
@@ -309,9 +308,9 @@ if(mysqli_num_rows($result)==1){
 $date = "$year-$month-$currentDayRel";
 $dayname = strtolower(date('l', strtotime($date)));
 if ($dayname == 'saturday' || $dayname == 'sunday') {
-    $calendar .= "&#60td class='td-unavailable'>&#60h4>$currentDay&#60/h4> &#60button class='btn-unavailable'>Week-end&#60/button>";
-} elseif ($date &#60 date('Y-m-d')) {
-    $calendar .= "&#60td class='td-unavailable'>&#60h4>$currentDay&#60/h4> &#60button class='btn-unavailable'>Day passed&#60/button>";
+    $calendar .= "&lt;td class='td-unavailable'>&lt;h4>$currentDay&lt;/h4> &lt;button class='btn-unavailable'>Week-end&lt;/button>";
+} elseif ($date &lt; date('Y-m-d')) {
+    $calendar .= "&lt;td class='td-unavailable'>&lt;h4>$currentDay&lt;/h4> &lt;button class='btn-unavailable'>Day passed&lt;/button>";
 }
                                 </code>
                             </pre>
@@ -361,34 +360,121 @@ if (isset($_POST['submit'])) {
                         <figure typeof="schema:SoftwareSourceCode">
                             <pre>
                                 <code>
-&#60?php
+&lt;?php
 while ($inreg = mysqli_fetch_assoc($result)) {
     if ($inreg['raspuns'] != NULL) {
 
 ?>
-        &#60tr>
-            &#60td>&#60?php echo $inreg['nume_vehicul']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['marca']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['piesa']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['date']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['timeslot']; ?>&#60/td>
-            &#60td>&#60?php echo $inreg['raspuns']; ?>&#60/td>
-            &#60/tr>
-&#60?php
+    &lt;tr>
+        &lt;td>&lt;?php echo $inreg['nume_vehicul']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['marca']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['piesa']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['date']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['timeslot']; ?>&lt;/td>
+        &lt;td>&lt;?php echo $inreg['raspuns']; ?>&lt;/td>
+    &lt;/tr>
+&lt;?php
     }
 }
 ?>
                                 </code>
                             </pre>
                         </figure>
+                        <p>Pentru administrator, paginile importante rămase sunt administrarea comenzilor primite, a stocurilor și realizarea de comenzi spre furnizori.</p>
+                        <ul>
+                            <li>Comenzile primite sunt afișate într-un tabel, într-un mod similar cu tabelul de programări trimise. Acesta, la apăsarea unui buton, poate 
+                                trimite un răspuns tuturor înregistrărilor în funcție de disponibilitatea pieselor dorite.
+                            </li>
+                            <li>Stocul service-ului este, în mod similar, afișat într-un tabel care poate fi exportat în format CSV, JSON sau PDF, sau importat dintr-un 
+                                fișier CSV sau JSON. În particular, exportarea prin PDF se face folosind librăria FPDF.
+                            </li>
+                        </ul>
+                        <figure typeof="schema:SoftwareSourceCode">
+                            <figcaption>Cod pentru exportarea în format CSV:</figcaption>
+                            <pre>
+                                <code>
+if(isset($_POST['eCSV'])){
+    $filename = "stoc_". date('m-d') . ".csv";
+    $delimitator = ",";
+
+    $file = fopen("php://memory","w");
+    $fields = array('ID','Vehicul','Marca','Piesa','Cantitate');
+    fputcsv($file, $fields, $delimitator);
+
+    $sql = "SELECT * FROM stoc ";
+    $result=mysqli_query($mysqli,$sql);
+    while($rows=mysqli_fetch_assoc($result))
+        {
+            $line = array($rows['id'],$rows['nume_vehicul'],$rows['marca'],$rows['piesa'],$rows['cantitate']);
+            fputcsv($file, $line, $delimitator);
+            }
+    
+    fseek($file, 0);
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+    fpassthru($file);
+    exit();
+}
+                                </code>
+                            </pre>
+                        </figure>
+                        <ul>
+                            <li>Comenzile spre furnizor se fac printr-un formular în care se introduc datele necesare. Similar cu trimiterea unei programări la service, 
+                                datele sunt trimise folosind POST, urmând să fie adăugate automat în baza de date.
+                            </li>
+                        </ul>
                     </section>
+                </section>
+                <section>
+                    <h4>2.2.3. JavaScript:</h4>
+                    <p>JavaScript, în cadrul proiectului, a fost implementat pentru a adăuga un meniu animat la o mare parte din pagini și pentru a implementa AJAX în 
+                        cadrul paginilor cu programări răspunse și stoc existent. AJAX are rolul de a permite paginii să se încarce fără elementele de tabel neîncărcate 
+                        până la momentul respectiv, acestea fiind adăugate în pagină când se încarcă.
+                    </p>
+                    <figure typeof="schema:SoftwareSourceCode">
+                        <figcaption>Codul JavaScript pentru implementarea AJAX în pagina cu stocul de piese:</figcaption>
+                        <pre>
+                            <code>
+var ajax = new XMLHttpRequest();
+ajax.open("GET", "datastoc.php", true);
+ajax.send();
+
+ajax.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        console.log(data);
+
+        var html = "";
+        for(var a = 0; a < data.length; a++) {
+            var id = data[a].id;
+            var nume_vehicul = data[a].nume_vehicul;
+            var marca = data[a].marca;
+            var piesa = data[a].piesa;
+            var cantitate = data[a].cantitate;
+
+            html += "&lt;tr>";
+            html += "&lt;td>" + id + "&lt;/td>";
+                html += "&lt;td>" + nume_vehicul + "&lt;/td>";
+                html += "&lt;td>" + marca + "&lt;/td>";
+                html += "&lt;td>" + piesa + "&lt;/td>";
+                html += "&lt;td>" + cantitate + "&lt;/td>";
+            html += "&lt;/tr>";
+        }
+        document.getElementById("data").innerHTML += html;
+    }
+};
+                            </code>
+                        </pre>
+                    </figure>
                 </section>
             </section>
         </section>
         <section role="doc-conclusion">
             <h2>3. Concluzie:</h2>
-            <p>În concluzie, această aplicație are rolul de a permite utilizatorilor obișnuiți să poată face programări la service-ul care administrează site-ul 
-                pentru reparațiile solicitate și de a permite administratorilor să răspundă acestor programări din timp, aprobându-le sau respingându-le motivat.
+            <p>În concluzie, această aplicație are rolul de a permite utilizatorilor obișnuiți să poată face programări la service-ul care administrează site-ul, 
+                pentru reparații solicitate, alegând și un interval orar convenabil. Administratorii pot răspunde rapid la aceste comenzi, acceptând sau 
+                respingându-le motivat, alături de supravegherea stocurilor de produse. Prin urmare, ineracțiunea inutilă este redusă, crescând eficiența service-ului.
             </p>
         </section>
     </article>

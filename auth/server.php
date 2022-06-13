@@ -14,16 +14,16 @@
 		$password_2=$mysqli->real_escape_string($_POST['password_2']);
 
 		if(empty($username)){
-			array_push($errors, "Username is required");
+			array_push($errors, "Numele de utilizator este obligatoriu");
 		}
 		if(empty($email)){
-			array_push($errors, "Email is required");
+			array_push($errors, "Adresa de e-mail este obligatorie");
 		}
 		if(empty($password_1)){
-			array_push($errors, "password is required");
+			array_push($errors, "Parola este obligatorie");
 		}
 		if($password_1 != $password_2){
-			array_push($errors, "The two passwords do not match");
+			array_push($errors, "Parolele trebuie să fie identice");
 		}
 		if(count($errors)==0)
 		{
@@ -64,10 +64,10 @@
 		$password=$mysqli->real_escape_string($_POST['password']);
 
 		if(empty($username)){
-			array_push($errors, "Username is required");
+			array_push($errors, "Numele de utilizator este obligatoriu");
 		}
 		if(empty($password)){
-			array_push($errors, "Password is required");
+			array_push($errors, "Parola este obligatorie");
 		}
 		if(count($errors)==0)
 		{
@@ -92,7 +92,7 @@
 				
 
 			}else{
-				array_push($errors, "wrong username/password combination");
+				array_push($errors, "Nume sau parolă incorecte");
 
 			}
 		}
