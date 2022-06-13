@@ -9,12 +9,6 @@ if (isset($_POST['submit'])) {
     $piesa = $mysqli->real_escape_string($_POST['piesa-f']);
     $cantitate = $mysqli->real_escape_string($_POST['quantity']);
 
-    //  $sql = 'SELECT MAX(id) FROM stoc';
-    //  $rez = mysqli_query($mysqli, $sql);
-    //  $inreg = mysqli_fetch_assoc($rez);
-    //  $id = $inreg['id'];
-    //  $id += 1; 
-
     $stmt = $mysqli->prepare("INSERT INTO stoc (nume_vehicul, marca, piesa, cantitate) VALUES (?,?,?,?)");
     $stmt->bind_param('ssss', $vehicul, $marca, $piesa, $cantitate);
     $stmt->execute();

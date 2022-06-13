@@ -27,7 +27,6 @@ if (isset($_POST['submit'])) {
     $target_file = $target_dir . $nume_fisier;
     $extension = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     $extensions_arr = array("mp4", "avi", "3gp", "mov", "mpeg", "jpg", "png");
-    // if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
     $nume_vehicul = $mysqli->real_escape_string($_POST['nume_vehicul']);
     $marca = $mysqli->real_escape_string($_POST['marca']);
     $piesa = $mysqli->real_escape_string($_POST['piesa']);
