@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyMaT - Comandare Piese</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
 </head>
 
@@ -97,40 +98,7 @@ if (isset($_POST['submit'])) {
             </div>
         </form>
     </div>
-
-
-    <div id="sideNav">
-        <nav>
-            <ul>
-                <li><a href="../principal/principal-admin.php">HOME</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <div id="menuBtn">
-        <img src="menu.png" id="menu">
-    </div>
-
-    <script>
-        var menuBtn = document.getElementById("menuBtn")
-        var sideNav = document.getElementById("sideNav")
-        var menu = document.getElementById("menu")
-        sideNav.style.right = "-250px";
-
-        menuBtn.onclick = function() {
-            if (sideNav.style.right == "-250px") {
-                sideNav.style.right = "0";
-                menu.src = "close.png";
-            } else {
-                sideNav.style.right = "-250px";
-                menu.src = "menu.png";
-            }
-        }
-        var scroll = new SmoothScroll('a[href*="#"]', {
-            speed: 1000,
-            speedAsDuration: true
-        });
-    </script>
+    <a class="btn-submit" href="../principal/principal-admin.php">Pagina Principală</a>
 
 </body>
 
