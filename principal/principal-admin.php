@@ -11,7 +11,7 @@ if (empty($_SESSION['username'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service</title>
+    <title>CyMaT - Administrator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,13 +19,9 @@ if (empty($_SESSION['username'])){
         <a href="#" class="logo">Service<span>.</span></a>
         <div class="menuToggle" onclick="toggleMenu();"></div>
         <ul class="navigation">
-            <li><a href="#banner" onclick="toggleMenu();">Home</a></li>
-            <li><a href="#about" onclick="toggleMenu();">About</a></li>
-            <li><a href="#menu" onclick="toggleMenu();">Menu</a></li>
-            <li><a href="#expert"onclick="toggleMenu();">Expert</a></li>
-            <li><a href="#testimonials"onclick="toggleMenu();">Testimonials</a></li>
-            <li><a href="#contact"onclick="toggleMenu();">Contact</a></li>
-            <li><a href="../admin/afisare_comenzi.php"onclick="toggleMenu();">Programari</a></li>
+            <li><a href="#banner" onclick="toggleMenu();">Acasă</a></li>
+            <li><a href="#about" onclick="toggleMenu();">Despre</a></li>
+            <li><a href="../admin/afisare_comenzi.php"onclick="toggleMenu();">Programări</a></li>
             <li><a href="../admin/stoc.php"onclick="toggleMenu();">Stoc Existent</a></li>
             <li><a href="../admin/comenzi_furnizor.php"onclick="toggleMenu();">Comenzi Furnizor</a></li>
             <li><a href="principal-admin.php?logout='1'"onclick="toggleMenu();">Logout</a> </li>
@@ -33,18 +29,20 @@ if (empty($_SESSION['username'])){
     </header>
     <section id="banner">
       <div class="banner-text">
-            <h2> Hello, <?php echo $_SESSION['username']; ?> !  </h2>
+            <h2> Bun venit, <?php echo $_SESSION['username']; ?>!  </h2>
+            <a class="btn" href="../admin/afisare_comenzi.php">Programări</a>
+            <a class="btn" href="../admin/stoc.php">Stoc Existent</a>
+            <a class="btn" href="../admin/comenzi_furnizor.php">Comenzi Furnizor</a>
            
       </div>
   </section>
-    <section class="banner" id="banner">
+  <section class="banner" id="banner">
         <div class="content">
-            <h2>Always Choose Good</h2>
+            <h2>Cea Mai Bună Alegere</h2>
             <p> Ne gandim la clientii nostri ca la niste invitati la petrecerea pe care am organizat-o.
-                 Este misiunea noastra de zi cu zi de a imbunatati fiecare aspect la experientei clientului”. 
-                 Jeff Bezos, CEO al Amazon.com
+                Este misiunea noastra de zi cu zi de a imbunatati fiecare aspect la experientei clientului” -
+                Jeff Bezos
             </p>
-            <a href="#menu" class="btn">Our Menu</a>
         </div>
     </section>
 
@@ -52,11 +50,11 @@ if (empty($_SESSION['username'])){
     <section class="about" id="about">
         <div class="row">
             <div class="col50">
-                <h2 class="titleText"><span>A</span>bout Us</h2>
-                <p>. “Consumatorii sunt statistici. Clientii sunt oameni”. Stanley Marcus, fost presedinte de consiliu director la Neiman Marcus
-                     “Daca nu ai grija de clientii tai, o va face altcineva”. Autor necunoscut
-                    “Exista un singur sef. Clientul. Si acesta poate sa-i concedieze pe toti din companie, de la presedintele consiliului director in jos, prin simplul gest de a-si cheltui banii in alta parte”. Sam Walton
-                </p>
+                <h2 class="titleText"><span>D</span>espre Noi</h2>
+                <p>“Consumatorii sunt statistici. Clientii sunt oameni.” - Stanley Marcus, fost presedinte de consiliu director la Neiman Marcus</p>
+                <p>“Daca nu ai grija de clientii tai, o va face altcineva.” - Autor necunoscut</p>
+                <p>“Exista un singur sef. Clientul. Si acesta poate sa-i concedieze pe toti din companie,
+                    de la presedintele consiliului director in jos, prin simplul gest de a-si cheltui banii in alta parte.” - Sam Walton</p>
             </div>
             <div class="col50">
                 <div class="imgBx">
@@ -70,13 +68,11 @@ if (empty($_SESSION['username'])){
 
     <section class="menu" id="menu">
         <div class="title">
-            <h2 class="titleText">Client <span>S</span>ervice</h2>
-            <p>
-                “Apropie-te mai mult ca niciodata de clientii tai. Du-te atat de aproape, incat sa le poti spune ce nevoie au inainte ca ei insisi sa stie”. Steve Jobs, fondator al Apple
-                “Clientii nu se asteapta sa fii perfect. Se asteapta insa sa rezolvi lucrurile cand acestea nu merg”. Donald Porter, V.P. al British Airways
-                “Un client multumit valoreaza mai mult decat o campanie publicitara de 10.000 de dolari”. Jim Rohn, antreprenor si speaker motivational
-                “Petrece-ti cat mai mult timp vorbind direct cu clientii. Vei fi surprins sa aflii cate companii nu-si apleaca urechea la clienti”. Ross Perot, Fondator al Electronic Data Systems si Perot Systems
-            </p>
+            <h2 class="titleText"><span>S</span>ervicii clienți</h2>
+            <p>“Apropie-te mai mult ca niciodata de clientii tai. Du-te atat de aproape, incat sa le poti spune ce nevoie au inainte ca ei insisi sa stie.” - Steve Jobs, fondator al Apple</p>
+            <p>“Clientii nu se asteapta sa fii perfect. Se asteapta insa sa rezolvi lucrurile cand acestea nu merg.” - Donald Porter, V.P. al British Airways</p>
+            <p>“Un client multumit valoreaza mai mult decat o campanie publicitara de 10.000 de dolari.” - Jim Rohn, antreprenor si speaker motivational</p>
+            <p>“Petrece-ti cat mai mult timp vorbind direct cu clientii. Vei fi surprins sa aflii cate companii nu-si apleaca urechea la clienti.” - Ross Perot, Fondator al Electronic Data Systems si Perot Systems</p>
         </div>
         <div class="content">
             <div class="box">
@@ -84,7 +80,7 @@ if (empty($_SESSION['username'])){
                     <img src="m1.jpg">
                 </div>
                 <div class="text">
-                    <h3>Reparatii Trotineta Electrica</h3>
+                    <h3>Reparații Trotinetă Electrică</h3>
                 </div>
             </div>
             <div class="box">
@@ -92,7 +88,7 @@ if (empty($_SESSION['username'])){
                     <img src="m2.jpg">
                 </div>
                 <div class="text">
-                    <h3>Reparatii Motocicleta</h3>
+                    <h3>Reparații Bicicletă</h3>
                 </div>
             </div>
             <div class="box">
@@ -100,7 +96,7 @@ if (empty($_SESSION['username'])){
                     <img src="m3.jpg">
                 </div>
                 <div class="text">
-                    <h3>Reparatii Bicicleta</h3>
+                    <h3>Reparații Motocicletă</h3>
                 </div>
             </div>
             <div class="box">
@@ -108,34 +104,18 @@ if (empty($_SESSION['username'])){
                     <img src="m4.jpg">
                 </div>
                 <div class="text">
-                    <h3>Reparatii trotineta</h3>
-                </div>
-            </div>
-            <div class="box">
-                <div class="imgBx">
-                    <img src="m5.jpg">
-                </div>
-                <div class="text">
-                    <h3>Reparatii Bicicleta</h3>
-                </div>
-            </div>
-            <div class="box">
-                <div class="imgBx">
-                    <img src="m6.jpg">
-                </div>
-                <div class="text">
-                    <h3>Reparatii Bicicleta</h3>
+                    <h3>Reparații trotinetă</h3>
                 </div>
             </div>
             <div class="title">
-                <a href="#" class="btn">View All</a>
+                <a href="#" class="btn">Titlu</a>
             </div>
         </div>
     </section>
 
     <section class="expert" id="expert">
         <div class="title">
-            <h2 class="titleText">Our Service <span>E</span>xpert</h2>
+            <h2 class="titleText"><span>E</span>xperții</h2>
             <p>Cei 4 muschetari</p>
         </div>
         <div class="content">
@@ -144,7 +124,7 @@ if (empty($_SESSION['username'])){
                     <img src="f1.jpg">
                 </div>
                 <div class="text">
-                    <h3>The Rock </h3>
+                    <h3>The Rock</h3>
                 </div>
             </div>
             <div class="box">
@@ -174,11 +154,10 @@ if (empty($_SESSION['username'])){
         </div>
     </section>
 
-    
+
     <section class="testimonials" id="testimonials">
         <div class="title white">
-            <h2 class="titleText">They <span>S</span>aid About Us</h2>
-            <p>Ceva de zis aici</p>
+            <h2 class="titleText"><span>C</span>e Spun Clienții</h2>
         </div>
         <div class="content">
             <div class="box">
@@ -187,7 +166,7 @@ if (empty($_SESSION['username'])){
                 </div>
                 <div class="text">
                     <p>
-                         Foarte bun.
+                        Un service minunat! Doar mă programez și când merg mă rezolvă imediat.
                     </p>
                     <h3>Ioana</h3>
                 </div>
@@ -198,7 +177,7 @@ if (empty($_SESSION['username'])){
                 </div>
                 <div class="text">
                     <p>
-                         Exceptional.
+                        Excepțional!
                     </p>
                     <h3>Ionel</h3>
                 </div>
@@ -209,54 +188,27 @@ if (empty($_SESSION['username'])){
                 </div>
                 <div class="text">
                     <p>
-                        Fara cuvinte.
+                        Fără cuvinte.
                     </p>
                     <h3>Andreea</h3>
                 </div>
             </div>
         </div>
-
     </section>
-
-
-    <section class="contact" id="contact">
-        <div class="title">
-            <h2 class="titleText"> <span>L</span>asati un mesaj</h2>
-            <p>Ajuta-ne sa devenim mai buni</p>
-        </div>
-        <div class="contactForm">
-            <h3>Send Message</h3>
-            <div class="inputBox">
-                <input type="email" placeholder="Name">
-            </div>
-            <div class="inputBox">
-                <input type="text" placeholder="Email">
-            </div>
-            <div class="inputBox">
-                <textarea placeholder="Message"></textarea>
-            </div>
-            <div class="inputBox">
-                <input type="submit" value="Send">
-            </div>
-        </div>
-
-    </section>
-
-
-
 
     <script type="text/javascript">
-        window.addEventListener('scroll',function(){
-            const header =document.querySelector('header');
-            header.classList.toggle("sticky",window.scrollY>0);
-        });   
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            header.classList.toggle("sticky", window.scrollY > 0);
+        });
 
-        function toggleMenu(){
-            const menuToggle=document.querySelector('.menuToggle');
-            const navigation=document.querySelector('.navigation');
+        function toggleMenu() {
+            const menuToggle = document.querySelector('.menuToggle');
+            const navigation = document.querySelector('.navigation');
             menuToggle.classList.toggle('active');
             navigation.classList.toggle('active');
         }
     </script>
 </body>
+
 </html>

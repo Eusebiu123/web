@@ -27,7 +27,6 @@ if (isset($_POST['submit'])) {
     $target_file = $target_dir . $nume_fisier;
     $extension = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     $extensions_arr = array("mp4", "avi", "3gp", "mov", "mpeg", "jpg", "png");
-    // if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
     $nume_vehicul = $mysqli->real_escape_string($_POST['nume_vehicul']);
     $marca = $mysqli->real_escape_string($_POST['marca']);
     $piesa = $mysqli->real_escape_string($_POST['piesa']);
@@ -40,13 +39,10 @@ if (isset($_POST['submit'])) {
     $bookings = array();
     if ($stmt->execute()) {
         $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $msg = "<div class='alert alert-danger'>Already Booked</div>";
-        } else {
+        if ($result->num_rows == 0) {
             $stmt = $mysqli->prepare("INSERT INTO bookings (name,date,timeslot,nume_vehicul,marca,piesa,detalii,nume_fisier,location) VALUES (?,?,?,?,?,?,?,?,?)");
             $stmt->bind_param('sssssssss', $name, $date, $timeslot, $nume_vehicul, $marca, $piesa, $detalii, $nume_fisier, $target_file);
             $stmt->execute();
-            $msg = "<div class='alert alert-success'>Booking Successfull</div>";
             $bookings[] = $timeslot;
             $stmt->close();
             $mysqli->close();
@@ -90,20 +86,16 @@ function timeslots($duration, $cleanup, $start, $end)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyMaT - Book Service Meeting</title>
+    <title>CyMaT - Programare Service</title>
     <link rel="stylesheet" href="booking.css">
 </head>
 
 <body>
     <section class="background"></section>
     <div class="table-booking">
-        <h1>Book for Date: <?php echo date('m/d/Y', strtotime($date)); ?></h1>
+        <h1>Programare pentru data: <?php echo date('d/m/Y', strtotime($date)); ?></h1>
         <hr>
         <div class="row">
-            <div class="table-booking">
-                <?php echo isset($msg) ? $msg : ""; ?>
-            </div>
-
             <?php $timeslots = timeslots($duration, $cleanup, $start, $end);
             foreach ($timeslots as $ts) {
             ?>
@@ -123,12 +115,8 @@ function timeslots($duration, $cleanup, $start, $end)
         <form method="post" action="book.php" enctype="multipart/form-data">
 
             <div class="form-booking-item">
-                <label for="">Selected Date</label>
+                <label for="">Data și ora alese</label>
                 <input class="form-booking-input" readonly type="text" name="date" id="date" value=<?php echo $date; ?>>
-            </div>
-
-            <div class="form-booking-item">
-                <label for="">Timeslot</label>
                 <input class="form-booking-input" required type="text" name="timeslot" id="timeslot" onkeydown="return false">
             </div>
 
@@ -157,11 +145,12 @@ function timeslots($duration, $cleanup, $start, $end)
             </div>
 
             <div class="form-booking-item">
-                <button class="btn-booking" type="submit" action="book.php" name="submit" value="Upload">
-                    Submit
-                </button>
+                <button class="btn-booking" type="submit" action="book.php" name="submit" value="Upload">Programare</button>
             </div>
         </form>
+    </section>
+    <section class="row" style="text-align:center">
+        <a class="btn-booking" href="../principal/principal-utilizator.php">Înapoi</a>
     </section>
 </body>
 

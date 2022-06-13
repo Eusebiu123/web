@@ -25,8 +25,6 @@ if(isset($_POST['submit'])){
                     $detalii=$mysqli->real_escape_string($_POST['detalii']);
                     $user=$_SESSION['username'];
                     $sql="INSERT INTO comenzi(username,nume_vehicul,marca,piesa,data,ora,detalii,nume_fisier,location) VALUES('".$user ."','".$nume_vehicul ."','".$marca ."','".$piesa ."','".$data ."','".$ora ."','".$detalii ."','".$name ."','".$target_file."')";
-                    //TODO inserat in bd si data,ora,nume_vehicul,piesa
-                    // $sql="INSERT INTO comenzi(username,nume_fisier,location) VALUES('".$user ."','".$name ."','".$target_file."')";
                     mysqli_query($mysqli,$sql);
                     
     

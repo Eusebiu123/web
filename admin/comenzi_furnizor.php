@@ -9,19 +9,13 @@ if (isset($_POST['submit'])) {
     $piesa = $mysqli->real_escape_string($_POST['piesa-f']);
     $cantitate = $mysqli->real_escape_string($_POST['quantity']);
 
-    //  $sql = 'SELECT MAX(id) FROM stoc';
-    //  $rez = mysqli_query($mysqli, $sql);
-    //  $inreg = mysqli_fetch_assoc($rez);
-    //  $id = $inreg['id'];
-    //  $id += 1; 
-
     $stmt = $mysqli->prepare("INSERT INTO stoc (nume_vehicul, marca, piesa, cantitate) VALUES (?,?,?,?)");
     $stmt->bind_param('ssss', $vehicul, $marca, $piesa, $cantitate);
     $stmt->execute();
     $stmt->close();
     $mysqli->close();
     sleep(1);
-    header("Location: http://localhost/web/principal/principal-admin.php");
+    header("Location: ../principal/principal-admin.php");
 }
 ?>
 
@@ -31,7 +25,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyMaT - Admin</title>
+    <title>CyMaT - Comandare Piese</title>
     <link rel="stylesheet" href="style2.css">
 </head>
 
