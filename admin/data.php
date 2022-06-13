@@ -1,7 +1,7 @@
 <?php
 include('../auth/server.php');
 $name = $_SESSION['username'];
-$result = mysqli_query($mysqli, "SELECT * FROM bookings WHERE raspuns is not NULL and name like '$name'");
+$result = mysqli_query($mysqli, "SELECT * FROM bookings WHERE raspuns is not NULL and name like '$name' order by date");
  
 $data = array();
 while ($row = mysqli_fetch_object($result))
