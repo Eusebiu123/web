@@ -1,7 +1,9 @@
 <?php
 include('../auth/server.php');
+if (empty($_SESSION['username'])) {
+    header('location: ../auth/login.php');
+}
 include('import_export.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +42,7 @@ include('import_export.php');
     <div class="buttons">
         <form action="stoc.php" method="post" enctype="multipart/form-data">
             <input type="file" class="btn-submit" name="file" accept=".csv,.xls,.xlsx,.json">
+            <input type="text" style="display:none" readonly name="page" value="stoc">
             <input type="submit" class="btn-submit" name="iCSV" value="Import CSV">
             <input type="submit" class="btn-submit" name="iJSON" value="Import JSON">
             <input type="submit" class="btn-submit" name="eCSV" value="Export CSV">

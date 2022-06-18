@@ -1,8 +1,13 @@
 <?php
 include('../auth/server.php');
+if (empty($_SESSION['username'])) {
+    header('location: ../auth/login.php');
+}
+include('import_export.php');
 
+$mysqli = new mysqli('localhost', 'root', '', 'registration');
 
-$sql = "SELECT * FROM bookings order by date";
+$sql = "SELECT * FROM bookings WHERE raspuns is NULL ORDER BY date";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -23,8 +28,11 @@ function check($mysqli, $inreg)
             $resurse['cantitate'] -= 1;
             $new = $resurse['cantitate'];
             $id = $resurse['id'];
-            $sql = "UPDATE stoc SET cantitate = '$new' WHERE id = '$id'";
-            $op = mysqli_query($mysqli, $sql);
+            $stmt = $mysqli->prepare("UPDATE stoc SET cantitate = ? WHERE id = ?");
+            $stmt->bind_param('ss', $new, $id);
+            $stmt->execute();
+            $stmt->close();
+            $mysqli->close();
         }
     }
     return $pret;
@@ -40,21 +48,21 @@ function fetchAll($mysqli)
         $id = $inreg['id'];
         if ($pret > 0) {
             $msj = 'Programare acceptata - pret estimativ: ' . $pret . ' lei';
-            $sql = "UPDATE bookings SET raspuns = '$msj',acceptat='True' WHERE id = '$id'";
-            $op = mysqli_query($mysqli, $sql);
+            $stmt = $mysqli->prepare("UPDATE bookings SET raspuns = ?, acceptat = 'True' WHERE id = ?");
+            $stmt->bind_param('ss', $msj, $id);
+            $stmt->execute();
+            $stmt->close();
+            $mysqli->close();
         } else {
             $x = rand(2, 5);
             $msj = 'Ne pare rau, dar nu avem in stoc piesele necesare pentru reparatie, reveniti in ' . $x . ' saptamani';
-            $sql = "UPDATE bookings SET raspuns = '$msj',acceptat='False' WHERE id = '$id'";
-            $op = mysqli_query($mysqli, $sql);
-    
+            $stmt = $mysqli->prepare("UPDATE bookings SET raspuns = ?, acceptat = 'False' WHERE id = ?");
+            $stmt->bind_param('ss', $msj, $id);
+            $stmt->execute();
+            $stmt->close();
+            $mysqli->close();
         }
     }
-}
-if (isset($_POST['submit'])) {
-    fetchAll($mysqli);
-    sleep(1);
-    header("Location: ../principal/principal-admin.php");
 }
 ?>
 
@@ -73,7 +81,7 @@ if (isset($_POST['submit'])) {
 <body>
     <table class="table-scheduling">
         <tr>
-            <th colspan="6">
+            <th colspan="7">
                 <h2 style="text-align: center;">PROGRAMĂRI</h2>
             </th>
         </tr>
@@ -85,6 +93,7 @@ if (isset($_POST['submit'])) {
             <th>PIESA</th>
             <th>DATA</th>
             <th>ORA</th>
+            <th>REZOLVARE</th>
         </tr>
         <?php
         while ($rows = mysqli_fetch_assoc($result)) {
@@ -96,14 +105,27 @@ if (isset($_POST['submit'])) {
                 <td><?php echo $rows['piesa']; ?></td>
                 <td><?php echo $rows['date']; ?></td>
                 <td><?php echo $rows['timeslot']; ?></td>
+                <td>
+                    <form action="formular_programare.php" method="post">
+                        <button type="submit" class="btn-submit" name="response_form" value=<?php echo $rows['id']; ?>>Rezolvă</button>
+                    </form>
+                </td>
             </tr>
         <?php
         }
         ?>
     </table>
-    <form action="afisare_comenzi.php" method="post">
-        <input type="submit" class="btn-submit" name="submit" value="Rezolvă Programările">
-    </form>
+    <div class="buttons">
+        <form action="afisare_comenzi.php" method="post" enctype="multipart/form-data">
+            <input type="file" class="btn-submit" name="file" accept=".csv,.xls,.xlsx,.json">
+            <input type="text" style="display:none" readonly name="page" value="rezolvare">
+            <input type="submit" class="btn-submit" name="iCSV" value="Import CSV">
+            <input type="submit" class="btn-submit" name="iJSON" value="Import JSON">
+            <input type="submit" class="btn-submit" name="eCSV" value="Export CSV">
+            <input type="submit" class="btn-submit" name="eJSON" value="Export JSON">
+            <input type="submit" class="btn-submit" name="ePDF" value="Export PDF">
+        </form>
+    </div>
     <a class="btn-submit" href="../principal/principal-admin.php">Pagina Principală</a>
 
 </body>
