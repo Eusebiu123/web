@@ -1,3 +1,13 @@
+<?php
+include('../auth/server.php');
+
+if (empty($_SESSION['username'])) {
+    header('location: ../auth/login.php');
+}
+
+include('import_export.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +38,15 @@
             <tbody id="data"></tbody>
         </t>
     </table>
+    <div class="buttons">
+        <form action="raspuns_programari.php" method="post" enctype="multipart/form-data">
+            <input type="text" style="display:none" readonly name="username" value=<?php echo $_SESSION['username'];?>>
+            <input type="text" style="display:none" readonly name="page" value="programari">
+            <input type="submit" class="btn-submit" name="eCSV" value="Export CSV">
+            <input type="submit" class="btn-submit" name="eJSON" value="Export JSON">
+            <input type="submit" class="btn-submit" name="ePDF" value="Export PDF">
+        </form>
+    </div>
     <a class="btn-submit" href="../principal/principal-utilizator.php">Pagina Principală</a>
 
     </script>

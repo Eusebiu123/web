@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(rgba(0,0,0,0.5),#009688),url(poza.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), #009688), url(poza.jpg);
     background-size: cover;
     height: 100vh;
     font-family: sans-serif;
@@ -11,10 +11,10 @@ body {
     width: 120px;
     position: fixed;
     top: 4%;
-    left:10%;   
+    left: 10%;
 }
 
-#sideNav{
+#sideNav {
     width: 250px;
     height: 100 vh;
     position: fixed;
@@ -33,23 +33,23 @@ body {
     /* border: 3px solid green; */
 }
 
-.buttons input{
+.buttons input {
     font-size: medium;
     border-radius: 5px;
     background-color: rgb(0, 92, 61);
 }
 
-nav ul li{
+nav ul li {
     list-style: none;
     margin: 50px 20px;
 }
 
-nav ul li a{
+nav ul li a {
     text-decoration: none;
-    color:#fff;
+    color: #fff;
 }
 
-#menuBtn{
+#menuBtn {
     width: 50px;
     height: 50px;
     background: #009688;
@@ -58,28 +58,13 @@ nav ul li a{
     right: 30px;
     top: 20px;
     border-radius: 3px;
-    z-index:3;
+    z-index: 3;
     cursor: pointer;
 }
 
-#menuBtn img{
+#menuBtn img {
     width: 25px;
     margin-top: 15px;
-}
-
-.training__form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 50vh;
-    font-size: 24px;
-    padding: 2em;
-    background: #191919;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
 }
 
 .training__title {
@@ -110,7 +95,7 @@ nav ul li a{
 
 .training__btn {
     font-size: 28px;
-    color:white;
+    color: white;
     text-align: center;
     text-decoration: none;
     background: none;
@@ -144,17 +129,17 @@ nav ul li a{
     transform: translate(-50%, 0);
 }
 
-.training__container > .training__btn {
+.training__container>.training__btn {
     width: 100%;
     margin-top: 0.5em;
     border-color: #ff0000;
 }
 
-.training__container > .training__btn:hover {
+.training__container>.training__btn:hover {
     background-color: #ff0000;
 }
 
-.training__container > .training__btn:active {
+.training__container>.training__btn:active {
     background-color: #800000;
 }
 
@@ -176,11 +161,52 @@ nav ul li a{
     align-self: center;
 }
 
+.form-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 50vh;
+    font-size: 24px;
+    padding: 2em;
+    background: #191919;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.form-submit select {
+    font-size: 18px;
+    color: white;
+    border: 1px solid #2ecc71;
+    background-color: black;
+    padding: 0.5em;
+    border-radius: 1em;
+    margin: 0.5em;
+}
+
+.form-submit input {
+    font-size: 18px;
+    color: white;
+    border: 1px solid #2ecc71;
+    background-color: black;
+    padding: 0.5em;
+    border-radius: 1em;
+    margin: 0.5em;
+}
+
+input[type="radio"] {
+    width: 1em;
+    height: 1em;
+    color: red;
+}
+
 .table-scheduling {
     width: 80vw;
-    line-height: 60px;
+    line-height: 40px;
     border: 1px;
-    background-color:#003833;
+    background-color: #003833;
 }
 
 .table-scheduling th {
@@ -193,20 +219,20 @@ nav ul li a{
 .table-scheduling td {
     padding: 0.5em;
     border: 2px solid #2ecc71;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: normal;
 }
 
 .btn-submit {
     font-size: 28px;
-    color:white;
+    color: white;
     text-align: center;
     text-decoration: none;
     background-color: #0f3a21;
     padding: 0.5em;
     border: 2px solid #2ecc71;
     border-radius: 1.5em;
-    margin-bottom: 1em;
+    margin: 1em;
     outline: none;
     transition: 0.25s;
     cursor: pointer;
@@ -219,7 +245,21 @@ nav ul li a{
 .btn-submit:active {
     transition: 0s;
     background-color: #0f3a21;
-    border-color:#0044ff;
+    border-color: #0044ff;
+}
+
+.red {
+    border: 2px solid red;
+}
+
+.red:hover {
+    background-color: red;
+}
+
+.red:active {
+    transition: 0s;
+    background-color: #0f3a21;
+    border-color: #8a0000;
 }
 
 @media (max-width: 1320px) {
@@ -227,6 +267,7 @@ nav ul li a{
         font-size: 14px;
         padding: 0em;
     }
+
     .table-scheduling td {
         font-size: 14px;
         padding: 0em;

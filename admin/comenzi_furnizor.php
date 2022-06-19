@@ -1,5 +1,8 @@
 <?php
 include('../auth/server.php');
+if (empty($_SESSION['username'])) {
+    header('location: ../auth/login.php');
+}
 
 $mysqli = new mysqli('localhost', 'root', '', 'registration');
 
@@ -15,7 +18,7 @@ if (isset($_POST['submit'])) {
     $stmt->close();
     $mysqli->close();
     sleep(1);
-    header("Location: ../principal/principal-admin.php");
+    header("Location: stoc.php");
 }
 ?>
 
@@ -31,38 +34,34 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <div class="container-f">
-        <div class="title-f">Formular</div>
+    <div class="form-submit">
+        <h3>Formular</h3>
         <form method="post" action="comenzi_furnizor.php">
-            <div class="company-f">
-                <div class="input-f">
-                    <span class="details-f">Nume Service</span>
-                    <input type="text" placeholder="Introduceti numele" required>
-                </div>
-                <div class="input-f">
-                    <span class="details-f">Email</span>
-                    <input type="email" placeholder="Introduceti email" required>
-                </div>
-                <div class="input-f">
-                    <span class="details-f">Nr. telefon</span>
-                    <input type="tel" placeholder="Introduceti numarul" required>
-                </div>
+            <div class="input-f">
+                <label for="">Nume Service:</label>
+                <input type="text" placeholder="Introduceti numele" required>
             </div>
-            <div class="categorie-detalii-f">
-                <span class="categorie-titlu-f">Tip vehicul</span>
-                <div class="category-f">
-                    <input type="radio" id="motocicleta" name="type-veh" value="motocicleta">
-                    <label for="motocicleta">Motocicleta</label>
-                    <input type="radio" id="bicicleta" name="type-veh" value="bicicleta">
-                    <label for="bicicleta">Bicicleta</label><br>
-                    <input type="radio" id="trotineta" name="type-veh" value="trotineta">
-                    <label for="trotineta">Trotineta</label>
-                    <input type="radio" id="trotineta-el" name="type-veh" value="trotineta-el">
-                    <label for="trotineta-el">Trotineta Electrica</label>
-                </div>
+            <div class="input-f">
+                <label for="">Email:</label>
+                <input type="email" placeholder="Introduceti email" required>
             </div>
-            <div class="marca-detalii-f">
-                <label for="marca-veh-f">Marca vehicul</label>
+            <div class="input-f">
+                <label for="">Nr. telefon:</label>
+                <input type="tel" placeholder="Introduceti numarul" required>
+            </div>
+            <label for="">Tip vehicul:</label>
+            <div>
+                <input type="radio" id="motocicleta" name="type-veh" value="motocicleta">
+                <label for="motocicleta">Motocicletă</label>
+                <input type="radio" id="bicicleta" name="type-veh" value="bicicleta">
+                <label for="bicicleta">Bicicletă</label><br>
+                <input type="radio" id="trotineta" name="type-veh" value="trotineta">
+                <label for="trotineta">Trotinetă</label>
+                <input type="radio" id="trotineta-el" name="type-veh" value="trotineta-el">
+                <label for="trotineta-el">Trotinetă Electrică</label>
+            </div>
+            <div>
+                <label for="marca-veh-f">Marca vehicul:</label>
                 <select name="marca-f" id="marca-f">
                     <option value="Kawasaki">Kawasaki</option>
                     <option value="Honda">Honda</option>
@@ -76,10 +75,10 @@ if (isset($_POST['submit'])) {
                     <option value="Zero">Zero</option>
                     <option value="Lime">Lime</option>
                     <option value="Razor">Razor</option>
-                </select><br>
+                </select>
             </div>
-            <div class="piesa-detalii-f">
-                <label for="piesa-veh-f">Piesa necesara</label>
+            <div>
+                <label for="piesa-veh-f">Piesa necesară:</label>
                 <select name="piesa-f" id="piesa-f">
                     <option value="Roata">Roata</option>
                     <option value="Cadran">Cadran</option>
@@ -93,12 +92,10 @@ if (isset($_POST['submit'])) {
                 <label for="quantity">Cantitate:</label>
                 <input type="number" id="quantity" name="quantity" min="1" max="100" step="1" value="1">
             </div>
-            <div class="button-f">
-                <input type="submit" name="submit" value="Submit">
-            </div>
+            <button class="btn-submit" type="submit" name="submit" value="comanda">Comandă</button>
         </form>
+        <a class="btn-submit" href="../principal/principal-admin.php">Pagina Principală</a>
     </div>
-    <a class="btn-submit" href="../principal/principal-admin.php">Pagina Principală</a>
 
 </body>
 
