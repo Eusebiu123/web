@@ -94,6 +94,7 @@ if (isset($_POST['confirm_delivery'])) {
             <input type="submit" class="btn-submit" name="eJSON" value="Export JSON">
             <input type="submit" class="btn-submit" name="ePDF" value="Export PDF">
         </form>
+        <a class="btn-submit" href="../principal/principal-admin.php">Pagina Principală</a>
     </div>
     <a class="btn-submit" href="formular_furnizor.php">Comandă piese</a>
     <a class="btn-submit" href="stoc.php">Stoc curent</a>
