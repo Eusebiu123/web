@@ -1,5 +1,9 @@
 <?php
 
+if ($_SESSION['isadmin'] == 1) {
+    header("Location: ../principal/principal-admin.php");
+}
+
 function build_calendar($month, $year)
 {
     $mysqli = new mysqli('localhost', 'root', '', 'registration');

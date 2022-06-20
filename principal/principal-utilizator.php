@@ -5,9 +5,10 @@ if (empty($_SESSION['username'])) {
     header('location: ../auth/login.php');
 }
 
+if ($_SESSION['isadmin'] != 0) {
+    header("Location: ../principal/principal-admin.php");
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">

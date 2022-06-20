@@ -1,12 +1,18 @@
 <?php
 
 include('../auth/server.php');
-if (empty($_SESSION['username'])){
-        header('location: ../auth/login.php');
+if (empty($_SESSION['username'])) {
+    header('location: ../auth/login.php');
 }
-?> 
+
+if ($_SESSION['isadmin'] != 1) {
+    header("Location: ../principal/principal-utilizator.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +20,7 @@ if (empty($_SESSION['username'])){
     <title>CyMaT - Administrator</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <a href="#" class="logo">Service<span>.</span></a>
@@ -21,22 +28,23 @@ if (empty($_SESSION['username'])){
         <ul class="navigation">
             <li><a href="#banner" onclick="toggleMenu();">Acasă</a></li>
             <li><a href="#about" onclick="toggleMenu();">Despre</a></li>
-            <li><a href="../admin/afisare_comenzi.php"onclick="toggleMenu();">Programări</a></li>
-            <li><a href="../admin/stoc.php"onclick="toggleMenu();">Stoc Existent</a></li>
-            <li><a href="../admin/comenzi_furnizor.php"onclick="toggleMenu();">Comenzi Furnizor</a></li>
-            <li><a href="principal-admin.php?logout='1'"onclick="toggleMenu();">Logout</a> </li>
+            <li><a href="../admin/afisare_comenzi.php" onclick="toggleMenu();">Programări</a></li>
+            <li><a href="../admin/stoc.php" onclick="toggleMenu();">Stoc Existent</a></li>
+            <li><a href="../admin/formular_furnizor.php" onclick="toggleMenu();">Comandă Piese</a></li>
+            <li><a href="../admin/administrare_user.php" onclick="toggleMenu();">Utilizatori</a></li>
+            <li><a href="principal-admin.php?logout='1'" onclick="toggleMenu();">Logout</a></li>
         </ul>
     </header>
     <section id="banner">
-      <div class="banner-text">
-            <h2> Bun venit, <?php echo $_SESSION['username']; ?>!  </h2>
+        <div class="banner-text">
+            <h2> Bun venit, <?php echo $_SESSION['username']; ?>! </h2>
             <a class="btn" href="../admin/afisare_comenzi.php">Programări</a>
             <a class="btn" href="../admin/stoc.php">Stoc Existent</a>
-            <a class="btn" href="../admin/comenzi_furnizor.php">Comenzi Furnizor</a>
-           
-      </div>
-  </section>
-  <section class="banner" id="banner">
+            <a class="btn" href="../admin/formular_furnizor.php">Comandă Piese</a>
+            <a class="btn" href="../admin/administrare_user.php">Admin. Utilizatori</a>
+        </div>
+    </section>
+    <section class="banner" id="banner">
         <div class="content">
             <h2>Cea Mai Bună Alegere</h2>
             <p> Ne gandim la clientii nostri ca la niste invitati la petrecerea pe care am organizat-o.

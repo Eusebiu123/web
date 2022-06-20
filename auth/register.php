@@ -25,7 +25,7 @@ include('server.php');
             </div>
 
             <div class="form-item">
-                <input type="text" name="email" id="text" placeholder="Adresă e-mail">
+                <input type="email" name="email" id="text" placeholder="Adresă e-mail">
             </div>
 
             <div class="form-item">

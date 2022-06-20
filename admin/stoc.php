@@ -1,7 +1,14 @@
 <?php
 include('../auth/server.php');
-include('import_export.php');
+if (empty($_SESSION['username'])) {
+    header('location: ../auth/login.php');
+}
 
+if ($_SESSION['isadmin'] != 1) {
+    header("Location: ../principal/principal-utilizator.php");
+}
+
+include('import_export.php');
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +29,7 @@ include('import_export.php');
     <table class="table-scheduling">
         <tr>
             <th colspan="5">
-                <h2 style="text-align: center;">Stoc Existent</h2>
+                <h2 style="text-align: center;">STOC EXISTENT</h2>
             </th>
         </tr>
 
@@ -32,14 +39,15 @@ include('import_export.php');
             <th>MARCA</th>
             <th>PIESA</th>
             <th>CANTITATE</th>
-            <tbody id="data"></tbody>
+            
         </tr>
-       
+        <tbody id="data"></tbody>
     </table>
 
     <div class="buttons">
         <form action="stoc.php" method="post" enctype="multipart/form-data">
             <input type="file" class="btn-submit" name="file" accept=".csv,.xls,.xlsx,.json">
+            <input type="text" style="display:none" readonly name="page" value="stoc">
             <input type="submit" class="btn-submit" name="iCSV" value="Import CSV">
             <input type="submit" class="btn-submit" name="iJSON" value="Import JSON">
             <input type="submit" class="btn-submit" name="eCSV" value="Export CSV">
@@ -47,16 +55,8 @@ include('import_export.php');
             <input type="submit" class="btn-submit" name="ePDF" value="Export PDF">
         </form>
     </div>
-    <a class="btn-submit" href="comenzi_furnizor.php">Comandă piese</a>
-
-    <div id="sideNav">
-        <nav>
-            <ul>
-                <li><a href="../principal/principal-admin.php">HOME</a></li>
-            </ul>
-        </nav>
-    </div>
-
+    <a class="btn-submit" href="formular_furnizor.php">Comandă piese</a>
+    <a class="btn-submit" href="comenzi_furnizor.php">Piese comandate</a>
     <a class="btn-submit" href="../principal/principal-admin.php">Pagina Principală</a>
 
     
@@ -95,3 +95,27 @@ include('import_export.php');
 </body>
 
 </html>
+
+<?php
+        while ($rows = $result->fetch_assoc()) {
+        ?>
+            <tr>
+                <td><?php echo $rows['username']; ?></td>
+                <td><?php echo $rows['email']; ?></td>
+                <td><?php if ($rows['isadmin'] == 1) echo "Da";
+                    else echo "Nu"; ?></td>
+                <td>
+                    <button class="btn-submit" onclick=revealCell(<?php echo $rows['id'] ?>)>Șterge</button>
+                    <button class="btn-submit" onclick=revealCell(<?php echo $rows['id'] ?>)>Schimbă admin.</button>
+                </td>
+                <td id=<?php echo $rows['id'] ?> style="display:none">
+                    <p>Ești sigur?</p>
+                    <form action="administrare_user.php" method="post">
+                        <button type="submit" class="btn-submit" name="delete_user" value=<?php echo $rows['id']; ?>>Da</button>
+                    </form>
+                    <button class="btn-submit red" onclick=hideCell(<?php echo $rows['id'] ?>)>Nu</button>
+                </td>
+            </tr>
+        <?php
+        }
+        ?>

@@ -1,6 +1,8 @@
 <?php
 include('../auth/server.php');
-$stmt = $mysqli->prepare("SELECT * FROM stoc");
+$stmt = $mysqli->prepare("SELECT id, username, email, isadmin FROM users WHERE username NOT IN (?)");
+$username = $_SESSION['username'];
+$stmt->bind_param('s', $username);
 $stmt->execute();
 $result = $stmt->get_result();
 $stmt->close();

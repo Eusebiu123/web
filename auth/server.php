@@ -27,29 +27,41 @@
 		}
 		if(count($errors)==0)
 		{
-			echo "aa";
-			$sql="SELECT * FROM users WHERE email='$email'";
-			$result=mysqli_query($mysqli,$sql);
+			$stmt = $mysqli->prepare("SELECT * FROM users WHERE email=?");
+			$stmt->bind_param('s', $email);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			$stmt->close();
 			if(mysqli_num_rows($result)==1){
 				array_push($errors, "Acest email a fost deja utilizat");
 			}
-			$sql="SELECT * FROM users WHERE username='$username'";
-			$result=mysqli_query($mysqli,$sql);
+			$stmt = $mysqli->prepare("SELECT * FROM users WHERE username=?");
+			$stmt->bind_param('s', $username);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			$stmt->close();
 			if(mysqli_num_rows($result)==1){
 				array_push($errors, "Acest username a fost deja utilizat");
 			}
 		}
 		if(count($errors)==0){
 			$password=md5($password_1);
-			$sql="INSERT INTO users (username,email,password) VALUES ('$username','$email','$password')";
-			mysqli_query($mysqli,$sql);
+			$stmt = $mysqli->prepare("INSERT INTO users (username,email,password) VALUES (?, ?, ?)");
+			$stmt->bind_param('sss', $username, $email, $password);
+			$stmt->execute();
+			$stmt->close();
 			$_SESSION['username']=$username;
 			$_SESSION['success']="You are now logged in";
 			$name = $_SESSION['username'];
-			$sql = "SELECT isadmin from users where username like '$name'";
-			$rez=mysqli_query($mysqli,$sql);
+
+			$stmt = $mysqli->prepare("SELECT isadmin from users where username like ?");
+			$stmt->bind_param('s', $name);
+			$stmt->execute();
+			$rez = $stmt->get_result();
+			$stmt->close();
 			while ($inreg = mysqli_fetch_assoc($rez)){
 				$admin = $inreg['isadmin'];
+				$_SESSION['isadmin'] = $admin;
 				if($admin == 1)
 				header('location: ../principal/principal-admin.php');
 				else{
@@ -83,6 +95,7 @@
 				$rez = mysqli_query($mysqli,$sql);
 				while ($inreg = mysqli_fetch_assoc($rez)){
 					$admin = $inreg['isadmin'];
+					$_SESSION['isadmin'] = $admin;
 					if($admin == 1)
 					header('location: ../principal/principal-admin.php');
 					else{

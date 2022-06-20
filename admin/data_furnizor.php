@@ -1,9 +1,6 @@
 <?php
 include('../auth/server.php');
-$stmt = $mysqli->prepare("SELECT * FROM stoc");
-$stmt->execute();
-$result = $stmt->get_result();
-$stmt->close();
+$result = mysqli_query($mysqli, "SELECT * FROM furnizor");
  
 $data = array();
 while ($row = mysqli_fetch_object($result))

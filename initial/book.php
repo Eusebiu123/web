@@ -1,5 +1,10 @@
 <?php
 include('../auth/server.php');
+
+if ($_SESSION['isadmin'] == 1) {
+    header("Location: ../principal/principal-admin.php");
+}
+
 $mysqli = new mysqli('localhost', 'root', '', 'registration');
 if (isset($_GET['date'])) {
     $date = $_GET['date'];
