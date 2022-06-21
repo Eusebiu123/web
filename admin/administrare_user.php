@@ -74,6 +74,17 @@ $mysqli->close();
         </thead>
         <tbody id="data"></tbody>
     </table>
+    <div class="buttons">
+        <form action="afisare_comenzi.php" method="post" enctype="multipart/form-data">
+            <input type="file" class="btn-submit" name="file" accept=".csv,.xls,.xlsx,.json">
+            <input type="text" style="display:none" readonly name="page" value="user">
+            <input type="submit" class="btn-submit" name="iCSV" value="Import CSV">
+            <input type="submit" class="btn-submit" name="iJSON" value="Import JSON">
+            <input type="submit" class="btn-submit" name="eCSV" value="Export CSV">
+            <input type="submit" class="btn-submit" name="eJSON" value="Export JSON">
+            <input type="submit" class="btn-submit" name="ePDF" value="Export PDF">
+        </form>
+    </div>
     <a class="btn-submit" href="../principal/principal-admin.php">Pagina Principală</a>
 </body>
 
@@ -105,7 +116,7 @@ $mysqli->close();
                 }
                 html += "<td>" + isadmin + "</td>";
                 html += "<td>" + "<button class='btn-submit' onclick=revealDeletionCell(" + id + ")>Șterge</button>";
-                
+
                 if (isadmin == "Da") {
                     html += "<button class='btn-submit' onclick=revealDemotionCell(" + id + ")>Scoate drepturi admin.</button>" + "</td>"
                 } else {
@@ -133,7 +144,7 @@ $mysqli->close();
 
         var noButton = document.createElement("button");
         noButton.className = "btn-submit red";
-        noButton.setAttribute("onclick", "hideCell(" + id +")");
+        noButton.setAttribute("onclick", "hideCell(" + id + ")");
         noButton.innerHTML = "Nu";
 
         cell.appendChild(paragraph);

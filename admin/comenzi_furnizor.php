@@ -90,11 +90,12 @@ if (isset($_POST['confirm_delivery'])) {
         <form action="comenzi_furnizor.php" method="post" enctype="multipart/form-data">
             <input type="file" class="btn-submit" name="file" accept=".csv,.xls,.xlsx,.json">
             <input type="text" style="display:none" readonly name="page" value="furnizor">
+            <input type="submit" class="btn-submit" name="iCSV" value="Import CSV">
+            <input type="submit" class="btn-submit" name="iJSON" value="Import JSON">
             <input type="submit" class="btn-submit" name="eCSV" value="Export CSV">
             <input type="submit" class="btn-submit" name="eJSON" value="Export JSON">
             <input type="submit" class="btn-submit" name="ePDF" value="Export PDF">
         </form>
-        <a class="btn-submit" href="../principal/principal-admin.php">Pagina Principală</a>
     </div>
     <a class="btn-submit" href="formular_furnizor.php">Comandă piese</a>
     <a class="btn-submit" href="stoc.php">Stoc curent</a>

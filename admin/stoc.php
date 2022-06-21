@@ -95,27 +95,3 @@ include('import_export.php');
 </body>
 
 </html>
-
-<?php
-        while ($rows = $result->fetch_assoc()) {
-        ?>
-            <tr>
-                <td><?php echo $rows['username']; ?></td>
-                <td><?php echo $rows['email']; ?></td>
-                <td><?php if ($rows['isadmin'] == 1) echo "Da";
-                    else echo "Nu"; ?></td>
-                <td>
-                    <button class="btn-submit" onclick=revealCell(<?php echo $rows['id'] ?>)>Șterge</button>
-                    <button class="btn-submit" onclick=revealCell(<?php echo $rows['id'] ?>)>Schimbă admin.</button>
-                </td>
-                <td id=<?php echo $rows['id'] ?> style="display:none">
-                    <p>Ești sigur?</p>
-                    <form action="administrare_user.php" method="post">
-                        <button type="submit" class="btn-submit" name="delete_user" value=<?php echo $rows['id']; ?>>Da</button>
-                    </form>
-                    <button class="btn-submit red" onclick=hideCell(<?php echo $rows['id'] ?>)>Nu</button>
-                </td>
-            </tr>
-        <?php
-        }
-        ?>

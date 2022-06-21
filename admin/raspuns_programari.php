@@ -5,8 +5,8 @@ if (empty($_SESSION['username'])) {
     header('location: ../auth/login.php');
 }
 
-if ($_SESSION['isadmin'] != 1) {
-    header("Location: ../principal/principal-utilizator.php");
+if ($_SESSION['isadmin'] == 1) {
+    header("Location: ../principal/principal-admin.php");
 }
 
 include('import_export.php');
@@ -38,7 +38,7 @@ include('import_export.php');
             <th>PIESA</th>
             <th>DATA</th>
             <th>ORA</th>
-            <th>RASPUNS</th>
+            <th>RĂSPUNS</th>
             <tbody id="data"></tbody>
         </t>
     </table>

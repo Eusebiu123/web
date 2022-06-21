@@ -1,6 +1,10 @@
 <?php
 include('../auth/server.php');
 
+if (empty($_SESSION['username'])) {
+    header('location: ../auth/login.php');
+}
+
 if ($_SESSION['isadmin'] == 1) {
     header("Location: ../principal/principal-admin.php");
 }
