@@ -29,9 +29,10 @@ if (isset($_POST['response_form'])) {
     $stmt->execute();
     $cantitate = $stmt->get_result();
     $cantitate = $cantitate->fetch_row();
-    $cantitate = $cantitate[0];
-    if ($cantitate == NULL) {
+    if ($cantitate[0] == NULL) {
         $cantitate = 0;
+    } else {
+        $cantitate = $cantitate[0];
     }
     $stmt->close();
     $mysqli->close();
